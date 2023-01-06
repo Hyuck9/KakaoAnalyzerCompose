@@ -1,4 +1,4 @@
-package me.hyuck.kakaoanalyzer.ui.theme
+package me.hyuck.kakaoanalyzer.foundation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

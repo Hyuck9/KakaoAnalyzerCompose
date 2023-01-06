@@ -1,4 +1,4 @@
-package me.hyuck.kakaoanalyzer.ui.theme
+package me.hyuck.kakaoanalyzer.foundation.theme
 
 import android.app.Activity
 import android.os.Build
