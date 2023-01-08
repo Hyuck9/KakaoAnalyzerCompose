@@ -3,8 +3,11 @@ package me.hyuck.kakaoanalyzer.foundation.data.local
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import me.hyuck.kakaoanalyzer.foundation.data.local.dao.ChatDao
 
 abstract class AppDatabase : RoomDatabase() {
+
+	abstract fun chatDao(): ChatDao
 
 	companion object {
 		private const val DATABASE_NAME = "KakaoAnalyzerCompose.db"
