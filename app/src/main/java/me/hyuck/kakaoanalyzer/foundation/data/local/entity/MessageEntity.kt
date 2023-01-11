@@ -1,10 +1,9 @@
 package me.hyuck.kakaoanalyzer.foundation.data.local.entity
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.Index
 import java.time.LocalDateTime
+import java.util.*
 
 @Entity(
 	tableName = "messages",
@@ -17,9 +16,17 @@ import java.time.LocalDateTime
 	indices = [Index(value = ["chatId"])]
 )
 data class MessageEntity(
+	@PrimaryKey
+	@ColumnInfo(name = "messageId")
+	val id: String = UUID.randomUUID().toString(),
+	@ColumnInfo(name = "chatId")
 	val chatId: String,
+	@ColumnInfo(name = "dateTime")
 	val dateTime: LocalDateTime,
+	@ColumnInfo(name = "userName")
 	val userName: String,
-	val messageContent: String,
+	@ColumnInfo(name = "content")
+	val content: String,
+	@ColumnInfo(name = "hour")
 	val hour: Int
 )
