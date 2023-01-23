@@ -1,4 +1,4 @@
-package me.hyuck.kakaoanalyzer.features.guide.ui
+package me.hyuck.kakaoanalyzer.features.home.guide.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

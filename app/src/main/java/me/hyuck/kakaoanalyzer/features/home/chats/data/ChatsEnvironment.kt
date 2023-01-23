@@ -1,4 +1,4 @@
-package me.hyuck.kakaoanalyzer.features.chats.data
+package me.hyuck.kakaoanalyzer.features.home.chats.data
 
 import javax.inject.Inject
 
