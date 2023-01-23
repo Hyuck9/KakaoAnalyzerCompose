@@ -1,12 +1,15 @@
 package me.hyuck.kakaoanalyzer.runtime
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.KakaoAnalyzerBottomBar
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.KakaoAnalyzerScaffold
+import me.hyuck.kakaoanalyzer.runtime.navigation.addHomeGraph
 
 @Composable
 fun KakaoAnalyzerApp() {
@@ -26,11 +29,19 @@ fun KakaoAnalyzerApp() {
                 SnackbarHost(
                     hostState = appState.snackbarHostState,
                     modifier = Modifier.systemBarsPadding(),
-                    snackbar = { snackbarData -> }
+                    snackbar = { snackbarData ->
+
+                    }
                 )
             }
         ) { innerPaddingModifier ->
-
+            NavHost(
+                navController = appState.navController,
+                startDestination = MainDestinations.HOME_ROUTE,
+                modifier = Modifier.padding(innerPaddingModifier)
+            ) {
+                addHomeGraph()
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
-package me.hyuck.kakaoanalyzer.features.chats.ui
+package me.hyuck.kakaoanalyzer.features.guide.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun ChatsScreen() {
-	Text(text = "Chats!!!!!")
+fun GuideScreen() {
+	Text(text = "Guide!!!!!")
 }

@@ -17,7 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.QuestionMark
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,8 +47,8 @@ enum class HomeSections(
 	val route: String
 ) {
 	CHATS(R.string.tab_chats, Icons.Outlined.Home, "home/chats"),
-	GUIDE(R.string.tab_chats, Icons.Outlined.QuestionMark, "home/guide"),
-	SETTINGS(R.string.tab_chats, Icons.Outlined.Settings, "home/settings")
+	GUIDE(R.string.tab_guide, Icons.Outlined.QuestionMark, "home/guide"),
+	SETTINGS(R.string.tab_settings, Icons.Outlined.Settings, "home/settings")
 }
 
 @Composable
@@ -57,8 +56,8 @@ fun KakaoAnalyzerBottomBar(
 	tabs: Array<HomeSections>,
 	currentRoute: String,
 	navigateToRoute: (String) -> Unit,
-	color: Color = MaterialTheme.colorScheme.surface,           // TODO: 추후 테마 재정의해서 컬러셋 변경
-	contentColor: Color = MaterialTheme.colorScheme.onSurface   // TODO: 추후 테마 재정의해서 컬러셋 변경
+	color: Color = KakaoAnalyzerTheme.colors.iconPrimary,
+	contentColor: Color = KakaoAnalyzerTheme.colors.iconInteractive
 ) {
 	val routes = remember { tabs.map { it.route } }
 	val currentSection = tabs.first { it.route == currentRoute }
@@ -87,9 +86,9 @@ fun KakaoAnalyzerBottomBar(
 				val selected = section == currentSection
 				val tint by animateColorAsState(
 					if (selected) {
-						MaterialTheme.colorScheme.primary     // TODO: 추후 테마 재정의해서 컬러셋 변경
+						KakaoAnalyzerTheme.colors.iconInteractive
 					} else {
-						MaterialTheme.colorScheme.primary     // TODO: 추후 테마 재정의해서 컬러셋 변경
+						KakaoAnalyzerTheme.colors.iconInteractiveInactive
 					}
 				)
 
@@ -289,7 +288,7 @@ private fun MeasureScope.placeTextAndIcon(
 @Composable
 private fun KakaoAnalyzerBottomNavIndicator(
 	strokeWidth: Dp = 2.dp,
-	color: Color = MaterialTheme.colorScheme.onPrimary,     // TODO: 추후 테마 재정의해서 컬러셋 변경
+	color: Color = KakaoAnalyzerTheme.colors.iconInteractive,
 	shape: Shape = BottomNavIndicatorShape
 ) {
 	Spacer(

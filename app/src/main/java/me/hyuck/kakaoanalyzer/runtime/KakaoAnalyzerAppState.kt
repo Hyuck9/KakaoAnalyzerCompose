@@ -16,6 +16,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
 
+object MainDestinations {
+    const val HOME_ROUTE = "home"
+}
 
 @Composable
 fun rememberKakaoAnalyzerAppState(
