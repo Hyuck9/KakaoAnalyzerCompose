@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.core.os.ConfigurationCompat
 import me.hyuck.kakaoanalyzer.R
-import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerComposeTheme
+import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import java.util.*
 
 enum class HomeSections(
@@ -310,7 +310,7 @@ private val BottomNavigationItemPadding = Modifier.padding(horizontal = 16.dp, v
 @Preview
 @Composable
 private fun KakaoAnalyzerBottomNavPreview() {
-	KakaoAnalyzerComposeTheme {
+	KakaoAnalyzerTheme {
 		KakaoAnalyzerBottomBar(
 			tabs = HomeSections.values(),
 			currentRoute = "home/chats",
