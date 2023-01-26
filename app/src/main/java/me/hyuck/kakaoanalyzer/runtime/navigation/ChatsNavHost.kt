@@ -1,9 +1,11 @@
 package me.hyuck.kakaoanalyzer.runtime.navigation
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsScreen
+import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsViewModel
 import me.hyuck.kakaoanalyzer.features.home.guide.ui.GuideScreen
 import me.hyuck.kakaoanalyzer.features.home.settings.ui.SettingsScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
@@ -15,7 +17,8 @@ fun NavGraphBuilder.addHomeGraph() {
 		startDestination = HomeSections.CHATS.route
 	) {
 		composable(HomeSections.CHATS.route) {
-			ChatsScreen()
+			val viewModel = hiltViewModel<ChatsViewModel>()
+			ChatsScreen(viewModel)
 		}
 		composable(HomeSections.GUIDE.route) {
 			GuideScreen()
