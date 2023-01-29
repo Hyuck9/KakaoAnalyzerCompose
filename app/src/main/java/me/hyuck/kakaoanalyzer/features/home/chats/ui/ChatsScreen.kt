@@ -38,7 +38,7 @@ fun ChatsScreen(
 		floatingActionButton = {
 			GoToKakaoTalkButton(
 				extended = true,
-				onClick = { testProgress++ }
+//				onClick = { testProgress++ }
 			)
 		}
 	) { padding ->
@@ -69,17 +69,15 @@ private fun ChatsContent(
 @Composable
 private fun GoToKakaoTalkButton(
 	extended: Boolean,
-	onClick: () -> Unit
 ) {
 	val context = LocalContext.current
 	FloatingActionButton(
 		onClick = {
-			/*with(context) {
+			with(context) {
 				startActivity(
 					packageManager.getLaunchIntentForPackage("com.kakao.talk")
 				)
-			}*/
-			onClick()
+			}
 		},
 		containerColor = KakaoYellow
 	) {
@@ -109,8 +107,7 @@ private fun GoToKakaoTalkButton(
 private fun GoToKakaoTalkButtonPreview(@PreviewParameter(BooleanParameterProvider::class) extended: Boolean) {
 	KakaoAnalyzerTheme {
 		GoToKakaoTalkButton(
-			extended = extended,
-			onClick = {}
+			extended = extended
 		)
 	}
 }
