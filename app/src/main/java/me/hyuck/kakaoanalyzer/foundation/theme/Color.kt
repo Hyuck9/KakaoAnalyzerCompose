@@ -84,4 +84,7 @@ val FunctionalDarkGrey = Color(0xff2e2e2e)
 val KakaoYellow = Color(0xffFFDE00)
 val KakaoBubbleBrown = Color(0xff3C1E1E)
 
+val ProgressBackground = Color(0xfff9f2ff)
+val ProgressForeground = Color(0xffa557f5)
+
 const val AlphaNearOpaque = 0.95f
