@@ -43,6 +43,13 @@ fun ChatsScreen(
 }
 
 @Composable
+private fun ChatsContent(
+	modifier: Modifier = Modifier,
+) {
+
+}
+
+@Composable
 private fun GoToKakaoTalkButton(
 	extended: Boolean
 ) {
