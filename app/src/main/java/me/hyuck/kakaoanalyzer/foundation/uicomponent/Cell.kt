@@ -1,20 +1,52 @@
 package me.hyuck.kakaoanalyzer.foundation.uicomponent
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.ProgressBackground
-import me.hyuck.kakaoanalyzer.foundation.theme.ProgressForeground
+
+private val ChatItemShape = RoundedCornerShape(10.dp)
+@Composable
+fun ProgressChatItemCell(
+    modifier: Modifier = Modifier,
+    percent: Float,
+) {
+    ProgressCell(
+        percent = percent,
+        content = @Composable {
+            Column(
+                modifier = modifier
+                    .padding(16.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = "가나다라마바사",
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                    Text(text = "123M")
+                }
+                Text(text = "2023-01-30")
+            }
+        }
+    )
+}
 
 @Composable
 fun ProgressCell(
@@ -25,15 +57,17 @@ fun ProgressCell(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
+            .shadow(elevation = 3.dp, shape = ChatItemShape)
+            .clip(ChatItemShape)
             .background(ProgressBackground)
     ) {
         Box(
             modifier = Modifier
                 .width(width = (maxWidth * percent / 100))
-                .background(ProgressForeground)
+                .background(Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2))
         ) {
-            content()
         }
+        content()
     }
 }
 
@@ -53,6 +87,15 @@ private fun ProgressCellPreview() {
                     color = Color.White
                 )
             }
+        )
+    }
+}
+@Preview(showBackground = true)
+@Composable
+private fun ProgressChatItemCellPreview() {
+    KakaoAnalyzerTheme {
+        ProgressChatItemCell(
+            percent = 60f
         )
     }
 }
