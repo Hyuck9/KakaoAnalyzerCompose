@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
@@ -26,10 +28,11 @@ fun ProgressChatItemCell(
 ) {
     ProgressCell(
         percent = percent,
+        height = 80.dp,
         content = @Composable {
             Column(
                 modifier = modifier
-                    .padding(16.dp)
+                    .padding(8.dp)
             ) {
                 Row(
                     modifier = Modifier
@@ -52,6 +55,7 @@ fun ProgressChatItemCell(
 fun ProgressCell(
     modifier: Modifier = Modifier,
     percent: Float,
+    height: Dp = 20.dp,
     content: @Composable () -> Unit
 ) {
     BoxWithConstraints(
@@ -59,14 +63,15 @@ fun ProgressCell(
             .fillMaxWidth()
             .shadow(elevation = 3.dp, shape = ChatItemShape)
             .clip(ChatItemShape)
-            .background(ProgressBackground)
+            .background(ProgressBackground),
+        contentAlignment = Alignment.CenterStart
     ) {
         Box(
             modifier = Modifier
                 .width(width = (maxWidth * percent / 100))
+                .height(height)
                 .background(Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2))
-        ) {
-        }
+        )
         content()
     }
 }
