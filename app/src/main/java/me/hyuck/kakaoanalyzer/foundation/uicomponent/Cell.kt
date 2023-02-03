@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.hyuck9.progressitem.ProgressItem
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.ProgressBackground
 
@@ -25,28 +26,33 @@ fun ProgressChatItemCell(
     modifier: Modifier = Modifier,
     percent: Float,
 ) {
-    ProgressCell(
-        percent = percent,
-        content = @Composable {
-            Column(
-                modifier = modifier
-                    .padding(vertical = 16.dp, horizontal = 8.dp)
+    ProgressItem(
+        modifier = modifier
+            .fillMaxWidth()
+            .shadow(elevation = 3.dp, shape = ChatItemShape)
+            .clip(ChatItemShape)
+            .background(ProgressBackground),
+        brush = Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2),
+        percent = percent
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(vertical = 16.dp, horizontal = 8.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ) {
-                    Text(
-                        modifier = Modifier.weight(1f),
-                        text = "가나다라마바사",
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                    Text(text = "123M")
-                }
-                Text(text = "2023-01-30")
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = "가나다라마바사",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                Text(text = "123M")
             }
+            Text(text = "2023-01-30")
         }
-    )
+    }
 }
 
 @Composable

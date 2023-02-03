@@ -78,6 +78,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$archLifecycleVersion"
 
+    // H-Library
+    implementation "com.github.Hyuck9:ComposeProgressItem:0.0.1"
+
     // Logging
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
