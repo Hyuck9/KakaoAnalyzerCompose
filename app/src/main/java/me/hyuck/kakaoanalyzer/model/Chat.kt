@@ -8,6 +8,7 @@ data class Chat(
     val title: String = "",
     val size: Int = 0,
     val path: String = "",
+    val status: ChatStatus = ChatStatus.NEW,
     val startDate: LocalDateTime = LocalDateTime.now(),
     val endDate: LocalDateTime = LocalDateTime.now(),
     val createdAt: LocalDateTime = LocalDateTime.now(),

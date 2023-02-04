@@ -3,6 +3,7 @@ package me.hyuck.kakaoanalyzer.foundation.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import me.hyuck.kakaoanalyzer.model.ChatStatus
 import java.time.LocalDateTime
 import java.util.*
 
@@ -17,6 +18,8 @@ data class ChatEntity(
 	val size: Int = 0,
 	@ColumnInfo(name = "filePath")
 	val path: String = "",
+	@ColumnInfo(name = "chatStatus")
+	val status: ChatStatus = ChatStatus.NEW,
 	@ColumnInfo(name = "startDate")
 	val startDate: LocalDateTime = LocalDateTime.now(),
 	@ColumnInfo(name = "endDate")

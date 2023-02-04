@@ -17,7 +17,7 @@ class ChatsEnvironment @Inject constructor(
         val files = txtFile.listFiles()
         files?.forEach {
             val file = File(it.absolutePath + File.separator + txtFileName)
-            Timber.i("file : $file}")
+            Timber.i("file : $file")
         }
     }
 
