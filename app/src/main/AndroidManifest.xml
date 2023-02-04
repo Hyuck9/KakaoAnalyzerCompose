@@ -21,16 +21,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KakaoAnalyzerCompose"
         tools:targetApi="31">
+
         <activity
-            android:name=".runtime.MainActivity"
+            android:name=".runtime.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.KakaoAnalyzerCompose">
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity
+            android:name=".runtime.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KakaoAnalyzerCompose">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

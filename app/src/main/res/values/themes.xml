@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.KakaoAnalyzerCompose" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="SplashScreenTheme" parent="Theme.KakaoAnalyzerCompose">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 </resources>
