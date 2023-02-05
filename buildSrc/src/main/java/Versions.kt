@@ -17,6 +17,7 @@ object Versions {
 
     // Lifecycle components
     const val lifecycle = "2.5.1"
+    const val activity = "1.6.1"
 
     // Navigation
     const val navigationCompose = "2.5.3"
@@ -28,8 +29,9 @@ object Versions {
     // Splash Screen
     const val splahScreen = "1.0.0"
 
-    // H-Library
+    // Library
     const val progressItem = "0.0.1"
+    const val tedPermission = "3.3.0"
 
     // Logging
     const val timber = "5.0.1"

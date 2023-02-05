@@ -33,8 +33,9 @@ object Dependencies {
     // Splash Screen
     val splahScreen by lazy { "androidx.core:core-splashscreen:${Versions.splahScreen}" }
 
-    // H-Library
+    // Library
     val composeProgressItem by lazy { "com.github.Hyuck9:ComposeProgressItem:${Versions.progressItem}" }
+    val tedPermission by lazy { "io.github.ParkSangGwon:tedpermission-normal:${Versions.tedPermission}" }
 
     // Timber Logging
     val timber by lazy { "com.jakewharton.timber:timber:${Versions.timber}" }

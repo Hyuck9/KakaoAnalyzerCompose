@@ -84,8 +84,9 @@ dependencies {
     // Splash
     implementation(Dependencies.splahScreen)
 
-    // H-Library
+    // Library
     implementation(Dependencies.composeProgressItem)
+    implementation(Dependencies.tedPermission)
 
     // Logging
     implementation(Dependencies.timber)
