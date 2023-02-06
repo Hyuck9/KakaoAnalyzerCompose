@@ -3,6 +3,7 @@ package me.hyuck.kakaoanalyzer.foundation.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import me.hyuck.kakaoanalyzer.foundation.extension.parseMemory
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import java.time.LocalDateTime
 import java.util.*
@@ -14,8 +15,12 @@ data class ChatEntity(
 	val id: String = UUID.randomUUID().toString(),
 	@ColumnInfo(name = "chatTitle")
 	val title: String = "",
+	@ColumnInfo(name = "saveDate")
+	val saveDate: String = "",
 	@ColumnInfo(name = "fileSize")
-	val size: Int = 0,
+	val fileSize: Long = 0,
+	@ColumnInfo(name = "lineSize")
+	val lineSize: Int = 0,
 	@ColumnInfo(name = "filePath")
 	val path: String = "",
 	@ColumnInfo(name = "chatStatus")
@@ -28,4 +33,6 @@ data class ChatEntity(
 	val createdAt: LocalDateTime = LocalDateTime.now(),
 	@ColumnInfo(name = "updatedAt")
 	val updatedAt: LocalDateTime = LocalDateTime.now(),
-)
+) {
+	val fileSizeUnit: String get() = fileSize.parseMemory()
+}

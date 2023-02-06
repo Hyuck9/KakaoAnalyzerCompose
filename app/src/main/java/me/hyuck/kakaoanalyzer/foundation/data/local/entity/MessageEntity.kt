@@ -9,7 +9,7 @@ import java.util.*
 	tableName = "messages",
 	foreignKeys = [ForeignKey(
 		entity = ChatEntity::class,
-		parentColumns = ["id"],
+		parentColumns = ["chatId"],
 		childColumns = ["chatId"],
 		onDelete = CASCADE
 	)],
