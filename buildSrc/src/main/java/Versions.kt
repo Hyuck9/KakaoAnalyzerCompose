@@ -6,7 +6,7 @@ object Versions {
     const val coreKtx = "1.9.0"
 
     // Room
-    const val room = "2.5.0"
+    const val room = "2.4.3"
 
     // Compose Base
     const val composeCompiler = "1.3.2"
