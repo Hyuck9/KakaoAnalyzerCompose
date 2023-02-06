@@ -20,6 +20,7 @@ import me.hyuck.kakaoanalyzer.foundation.preview.BooleanParameterProvider
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoYellow
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ProgressChatItemCell
+import timber.log.Timber
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,9 +28,15 @@ import me.hyuck.kakaoanalyzer.foundation.uicomponent.ProgressChatItemCell
 fun ChatsScreen(
 	viewModel: ChatsViewModel
 ) {
+	val localFilesDir = LocalContext.current.filesDir
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
 	var testProgress by remember { mutableStateOf(60f) }
+
+	LaunchedEffect(Unit) {
+		viewModel.dispatch(ChatsAction.FileScan(localFilesDir))
+		Timber.tag("TEST").i("LaunchedEffect")
+	}
 
 	Scaffold(
 		floatingActionButton = {

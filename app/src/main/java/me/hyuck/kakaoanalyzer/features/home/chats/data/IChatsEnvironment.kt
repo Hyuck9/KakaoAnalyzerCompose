@@ -1,5 +1,7 @@
 package me.hyuck.kakaoanalyzer.features.home.chats.data
 
+import java.io.File
+
 interface IChatsEnvironment {
-    fun test()
+    fun fileScan(localFilesDir: File)
 }
