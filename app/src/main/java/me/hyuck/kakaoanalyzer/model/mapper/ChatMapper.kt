@@ -9,7 +9,7 @@ fun ChatEntity.toChat(): Chat {
     return Chat(
         id = id,
         title = title,
-        size = size,
+        size = fileSize,
         path = path,
         startDate = startDate,
         endDate = endDate,
@@ -22,7 +22,7 @@ fun Chat.toChatEntity(): ChatEntity {
     return ChatEntity(
         id = id,
         title = title,
-        size = size,
+        fileSize = size,
         path = path,
         startDate = startDate,
         endDate = endDate,

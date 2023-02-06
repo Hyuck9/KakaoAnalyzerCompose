@@ -6,7 +6,7 @@ import java.util.*
 data class Chat(
     val id: String = UUID.randomUUID().toString(),
     val title: String = "",
-    val size: Int = 0,
+    val size: Long = 0,
     val path: String = "",
     val status: ChatStatus = ChatStatus.NEW,
     val startDate: LocalDateTime = LocalDateTime.now(),
