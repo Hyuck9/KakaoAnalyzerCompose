@@ -3,7 +3,10 @@ package me.hyuck.kakaoanalyzer.features.home.chats.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -42,7 +45,6 @@ fun ChatsScreen(
 		floatingActionButton = {
 			GoToKakaoTalkButton(
 				extended = true,
-//				onClick = { testProgress++ }
 			)
 		}
 	) { padding ->
@@ -58,8 +60,25 @@ fun ChatsScreen(
 @Composable
 private fun ChatsContent(
 	modifier: Modifier = Modifier,
+	chats: List<ChatItem>
 ) {
-
+	LazyColumn(
+		modifier = modifier
+			.fillMaxSize()
+	) {
+		items(
+			items = chats,
+			key = { item -> item.identifier() }
+		) { item ->
+			when (item) {
+				is ChatItem.New -> {
+					item.chat
+				}
+				is ChatItem.InProgress -> {}
+				is ChatItem.Complete -> {}
+			}
+		}
+	}
 }
 
 @Composable

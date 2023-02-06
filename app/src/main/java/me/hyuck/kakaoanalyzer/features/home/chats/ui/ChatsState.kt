@@ -24,3 +24,9 @@ sealed class ChatItem {
         val chat: Chat
     ) : ChatItem()
 }
+
+fun ChatItem.identifier() = when (this) {
+    is ChatItem.New -> chat.id
+    is ChatItem.InProgress -> chat.id
+    is ChatItem.Complete -> chat.id
+}
