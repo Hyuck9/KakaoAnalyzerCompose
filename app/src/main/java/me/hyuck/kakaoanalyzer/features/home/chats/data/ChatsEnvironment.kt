@@ -15,18 +15,17 @@ class ChatsEnvironment @Inject constructor(
     private val txtFilePath = Environment.getExternalStorageDirectory().absolutePath + "/KakaoTalk/Chats"
     private val txtFileName = "KakaoTalkChats.txt"
 
-    override fun fileScan(localFilesDir: File) {
+    override suspend fun fileScan(localFilesDir: File) {
         val files = localFilesDir.listFiles()
         files?.forEach {
             val file = File("${it.absoluteFile}/$txtFileName")
-            Timber.tag("TEST").i("file : ${file.canRead()} - ${file.parentFile?.name} - ${file.lastModified()}")
             saveChat(file)
         }
     }
 
-    private fun saveChat(chatsFile: File) {
+    private suspend fun saveChat(chatsFile: File) {
         val chatId = chatsFile.parentFile?.name ?: return
-        // TODO: chatId 조회 후 있으면 Pass, 없으면 아래 Insert 로직 수행
+        if (chatRepository.getChatById(chatId) > 0) return
         try {
             val readLines = chatsFile.readLines()
             if (readLines.size > 5) {
@@ -40,7 +39,7 @@ class ChatsEnvironment @Inject constructor(
                     startDate = readLines[4].toLocalDateTime()
                 )
                 Timber.tag("TEST").i(chatEntity.toString())
-                // TODO: Chats Insert
+                chatRepository.saveChat(chatEntity)
             } else {
                 chatsFile.parentFile?.delete() ?: chatsFile.delete()
             }

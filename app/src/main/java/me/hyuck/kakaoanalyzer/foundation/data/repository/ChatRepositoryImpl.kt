@@ -9,6 +9,9 @@ class ChatRepositoryImpl(
 	private val chatDao: ChatDao,
 	private val ioDispatcher: CoroutineDispatcher
 ) : ChatRepository {
+	override suspend fun getChatById(chatId: String): Int {
+		return chatDao.getChatById(chatId)
+	}
 
 	override suspend fun saveChat(chatEntity: ChatEntity) = withContext(ioDispatcher) {
 		chatDao.saveChat(chatEntity)
