@@ -1,9 +1,11 @@
 package me.hyuck.kakaoanalyzer.features.home.chats.data
 
 import android.os.Environment
+import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.local.entity.ChatEntity
 import me.hyuck.kakaoanalyzer.foundation.data.repository.ChatRepository
 import me.hyuck.kakaoanalyzer.foundation.extension.toLocalDateTime
+import me.hyuck.kakaoanalyzer.model.Chat
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -14,6 +16,8 @@ class ChatsEnvironment @Inject constructor(
 
     private val txtFilePath = Environment.getExternalStorageDirectory().absolutePath + "/KakaoTalk/Chats"
     private val txtFileName = "KakaoTalkChats.txt"
+
+    override fun getChatList(): Flow<List<Chat>> = chatRepository.getChats()
 
     override suspend fun fileScan(localFilesDir: File) {
         val files = localFilesDir.listFiles()

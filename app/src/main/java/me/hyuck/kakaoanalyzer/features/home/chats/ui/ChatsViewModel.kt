@@ -12,6 +12,18 @@ class ChatsViewModel @Inject constructor(
     chatsEnvironment: IChatsEnvironment
 ) : StatefulViewModel<ChatsState, Unit, ChatsAction, IChatsEnvironment>(ChatsState(), chatsEnvironment) {
 
+    init {
+        initChats()
+    }
+
+    private fun initChats() {
+        viewModelScope.launch {
+            environment.getChatList().collect {
+                setState { copy(items = it.toMutableList()) }
+            }
+        }
+    }
+
     override fun dispatch(action: ChatsAction) {
         when (action) {
             is ChatsAction.FileScan -> {
