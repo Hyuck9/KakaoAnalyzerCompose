@@ -33,6 +33,4 @@ data class ChatEntity(
 	val createdAt: LocalDateTime = LocalDateTime.now(),
 	@ColumnInfo(name = "updatedAt")
 	val updatedAt: LocalDateTime = LocalDateTime.now(),
-) {
-	val fileSizeUnit: String get() = fileSize.parseMemory()
-}
+)
