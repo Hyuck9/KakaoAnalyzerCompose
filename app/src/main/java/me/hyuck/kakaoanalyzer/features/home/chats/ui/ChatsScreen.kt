@@ -22,6 +22,7 @@ import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.preview.BooleanParameterProvider
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoYellow
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.NewProgressChatItemCell
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ProgressChatItemCell
 import timber.log.Timber
 
@@ -38,7 +39,6 @@ fun ChatsScreen(
 
 	LaunchedEffect(Unit) {
 		viewModel.dispatch(ChatsAction.FileScan(localFilesDir))
-		Timber.tag("TEST").i("LaunchedEffect")
 	}
 
 	Scaffold(
@@ -49,10 +49,14 @@ fun ChatsScreen(
 		}
 	) { padding ->
 
-		ProgressChatItemCell(
+		ChatsContent(
+			modifier = Modifier.padding(padding),
+			chats = state.chatItems
+		)
+		/*ProgressChatItemCell(
 			modifier = Modifier.padding(padding),
 			percent = testProgress
-		)
+		)*/
 	}
 
 }
@@ -65,6 +69,7 @@ private fun ChatsContent(
 	LazyColumn(
 		modifier = modifier
 			.fillMaxSize()
+			.padding(all = 16.dp)
 	) {
 		items(
 			items = chats,
@@ -72,7 +77,10 @@ private fun ChatsContent(
 		) { item ->
 			when (item) {
 				is ChatItem.New -> {
-					item.chat
+					NewProgressChatItemCell(
+						chat = item.chat,
+						onClick = { /* TODO: 분석 Progress 진행 */ }
+					)
 				}
 				is ChatItem.InProgress -> {}
 				is ChatItem.Complete -> {}
