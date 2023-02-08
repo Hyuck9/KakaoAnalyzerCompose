@@ -20,6 +20,6 @@ data class Chat(
 ) {
     val fileSizeUnit: String get() = fileSize.parseMemory()
     val progress: Float get() {
-        return analysisLine / lineSize * 100f
+        return analysisLine.toFloat() / lineSize.toFloat() * 100f
     }
 }
