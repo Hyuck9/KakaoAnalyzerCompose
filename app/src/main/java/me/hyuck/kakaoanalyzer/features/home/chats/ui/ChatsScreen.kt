@@ -23,8 +23,7 @@ import me.hyuck.kakaoanalyzer.foundation.preview.BooleanParameterProvider
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoYellow
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.NewProgressChatItemCell
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.ProgressChatItemCell
-import timber.log.Timber
+import me.hyuck.kakaoanalyzer.model.Chat
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,8 +33,6 @@ fun ChatsScreen(
 ) {
 	val localFilesDir = LocalContext.current.filesDir
 	val state by viewModel.state.collectAsStateWithLifecycle()
-
-	var testProgress by remember { mutableStateOf(60f) }
 
 	LaunchedEffect(Unit) {
 		viewModel.dispatch(ChatsAction.FileScan(localFilesDir))
@@ -51,12 +48,9 @@ fun ChatsScreen(
 
 		ChatsContent(
 			modifier = Modifier.padding(padding),
-			chats = state.chatItems
+			chats = state.chatItems,
+			onAnalyzeStart = { /* TODO: 분석 Progress 진행 */ }
 		)
-		/*ProgressChatItemCell(
-			modifier = Modifier.padding(padding),
-			percent = testProgress
-		)*/
 	}
 
 }
@@ -64,7 +58,8 @@ fun ChatsScreen(
 @Composable
 private fun ChatsContent(
 	modifier: Modifier = Modifier,
-	chats: List<ChatItem>
+	chats: List<ChatItem>,
+	onAnalyzeStart: (Chat) -> Unit
 ) {
 	LazyColumn(
 		modifier = modifier
@@ -79,7 +74,7 @@ private fun ChatsContent(
 				is ChatItem.New -> {
 					NewProgressChatItemCell(
 						chat = item.chat,
-						onClick = { /* TODO: 분석 Progress 진행 */ }
+						onClick = { onAnalyzeStart(item.chat) }
 					)
 				}
 				is ChatItem.InProgress -> {}
