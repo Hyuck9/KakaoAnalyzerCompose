@@ -31,6 +31,9 @@ class ChatsViewModel @Inject constructor(
                     environment.fileScan(action.localFilesDir)
                 }
             }
+            is ChatsAction.AnalyzeChat -> {
+                TODO()
+            }
         }
     }
 

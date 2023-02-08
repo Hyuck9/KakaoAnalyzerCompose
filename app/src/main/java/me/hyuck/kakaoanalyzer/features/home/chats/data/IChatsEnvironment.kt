@@ -7,5 +7,8 @@ import java.io.File
 interface IChatsEnvironment {
 
     fun getChatList(): Flow<List<Chat>>
+
     suspend fun fileScan(localFilesDir: File)
+
+    suspend fun analyzeChat(chat: Chat)
 }
