@@ -32,6 +32,12 @@ class ChatsEnvironment @Inject constructor(
 
     override suspend fun analyzeChat(chat: Chat) {
         chatRepository.updateStatus(chat.id, ChatStatus.IN_PROGRESS)
+        try {
+            parseFile(chat)
+            chatRepository.updateStatus(chat.id, ChatStatus.ANALYSIS_COMPLETE)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
@@ -62,28 +68,32 @@ class ChatsEnvironment @Inject constructor(
         }
     }
 
-    private suspend fun parseFile(chat: Chat, chatFile: File) {
-        try {
-            val readLines = chatFile.readLines()
-            var message: StringBuilder? = null
-            readLines.forEachIndexed { index, line ->
-                if (index >= 5 ) {
-                    if (line.isFirstDateTimeMessage()) {
-                        message = StringBuilder(line)
-                    } else {
-                        if ( line.isNotDateTimeMessage() ) {
-                            if (line.isEmpty()) {   // 개행된 메시지 이므로 이전 메시지 뒤에 붙이기
-                                message?.append(" $line")
-                            }
-                        } else {
-                            
+    @Throws(Exception::class)
+    private suspend fun parseFile(chat: Chat) {
+        val chatFile = File(chat.path)
+        val readLines = chatFile.readLines()
+        var message: StringBuilder? = null
+        readLines.forEachIndexed { index, line ->
+            if (index >= 5 ) {
+                if (line.isFirstDateTimeMessage()) {
+                    message?.let {
+                        Timber.tag("TEST").i("완성된 메시지 : ${it.toString().trim()}")
+                    } ?: Timber.tag("TEST").i("message is null")
+                    message = StringBuilder(line)
+                } else {
+                    if ( line.isNotDateTimeMessage() ) {
+                        if (line.isEmpty()) {   // 개행된 메시지 이므로 이전 메시지 뒤에 붙이기
+                            message?.append(" $line")
                         }
                     }
                 }
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+            chatRepository.updateProgress(chat.id, index + 1)
         }
+
+        message?.let {
+            Timber.tag("TEST").i("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
+        } ?: Timber.tag("TEST").i("파싱 완료 후 message is null")
     }
 
 

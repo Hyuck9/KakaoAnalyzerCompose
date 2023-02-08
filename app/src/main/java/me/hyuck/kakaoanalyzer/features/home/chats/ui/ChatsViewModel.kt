@@ -32,7 +32,9 @@ class ChatsViewModel @Inject constructor(
                 }
             }
             is ChatsAction.AnalyzeChat -> {
-                TODO()
+                viewModelScope.launch {
+                    environment.analyzeChat(action.chat)
+                }
             }
         }
     }

@@ -40,6 +40,7 @@ fun NewProgressChatItemCell(
             .clip(ChatItemShape)
             .background(ProgressBackground),
         brush = Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2),
+        percent = chat.progress
     ) {
         Column(
             modifier = Modifier

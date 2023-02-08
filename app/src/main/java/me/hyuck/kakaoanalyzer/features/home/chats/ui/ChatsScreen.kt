@@ -49,7 +49,9 @@ fun ChatsScreen(
 		ChatsContent(
 			modifier = Modifier.padding(padding),
 			chats = state.chatItems,
-			onAnalyzeStart = { /* TODO: 분석 Progress 진행 */ }
+			onAnalyzeStart = {  chat ->
+				viewModel.dispatch(ChatsAction.AnalyzeChat(chat))
+			}
 		)
 	}
 
@@ -77,8 +79,18 @@ private fun ChatsContent(
 						onClick = { onAnalyzeStart(item.chat) }
 					)
 				}
-				is ChatItem.InProgress -> {}
-				is ChatItem.Complete -> {}
+				is ChatItem.InProgress -> {
+					NewProgressChatItemCell(
+						chat = item.chat,
+						onClick = { onAnalyzeStart(item.chat) }
+					)
+				}
+				is ChatItem.Complete -> {
+					NewProgressChatItemCell(
+						chat = item.chat,
+						onClick = {  }
+					)
+				}
 			}
 		}
 	}

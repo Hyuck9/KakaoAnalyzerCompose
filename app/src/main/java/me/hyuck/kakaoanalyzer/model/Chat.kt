@@ -19,4 +19,7 @@ data class Chat(
     val updatedAt: LocalDateTime = LocalDateTime.now(),
 ) {
     val fileSizeUnit: String get() = fileSize.parseMemory()
+    val progress: Float get() {
+        return analysisLine / lineSize * 100f
+    }
 }
