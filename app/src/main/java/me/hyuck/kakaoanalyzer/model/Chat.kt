@@ -9,6 +9,7 @@ data class Chat(
     val title: String = "",
     val saveDate: String = "",
     val fileSize: Long = 0,
+    val analysisLine: Int = 0,
     val lineSize: Int = 0,
     val path: String = "",
     val status: ChatStatus = ChatStatus.NEW,

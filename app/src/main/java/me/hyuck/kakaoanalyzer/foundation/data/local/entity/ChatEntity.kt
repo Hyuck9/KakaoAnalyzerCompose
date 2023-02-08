@@ -19,6 +19,8 @@ data class ChatEntity(
 	val saveDate: String = "",
 	@ColumnInfo(name = "fileSize")
 	val fileSize: Long = 0,
+	@ColumnInfo(name = "analysisLine")
+	val analysisLine: Int = 0,
 	@ColumnInfo(name = "lineSize")
 	val lineSize: Int = 0,
 	@ColumnInfo(name = "filePath")
