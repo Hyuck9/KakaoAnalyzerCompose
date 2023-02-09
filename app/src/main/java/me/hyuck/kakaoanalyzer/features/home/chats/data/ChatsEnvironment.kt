@@ -7,9 +7,11 @@ import me.hyuck.kakaoanalyzer.foundation.data.repository.message.MessageReposito
 import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
 import me.hyuck.kakaoanalyzer.foundation.extension.isFirstDateTimeMessage
 import me.hyuck.kakaoanalyzer.foundation.extension.isNotDateTimeMessage
+import me.hyuck.kakaoanalyzer.foundation.extension.isPassedInOutMessage
 import me.hyuck.kakaoanalyzer.foundation.extension.toLocalDateTime
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.ChatStatus
+import me.hyuck.kakaoanalyzer.model.Message
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -60,7 +62,6 @@ class ChatsEnvironment @Inject constructor(
                     path = chatFile.absolutePath,
                     startDate = readLines[4].toLocalDateTime()
                 )
-                Timber.tag("TEST").i(chatEntity.toString())
                 chatRepository.saveChat(chatEntity)
             } else {
                 chatFile.parentFile?.delete() ?: chatFile.delete()
@@ -79,7 +80,7 @@ class ChatsEnvironment @Inject constructor(
             if (index >= 5 ) {
                 if (line.isFirstDateTimeMessage()) {
                     message?.let {
-                        Timber.tag("TEST").i("완성된 메시지 : ${it.toString().trim()}")
+                        parseMessage(chat.id, it.toString().trim(), index + 1)
                     } ?: Timber.tag("TEST").i("message is null")
                     message = StringBuilder(line)
                 } else {
@@ -90,17 +91,31 @@ class ChatsEnvironment @Inject constructor(
                     }
                 }
             }
-            chatRepository.updateProgress(chat.id, index + 1)
         }
 
         message?.let {
             Timber.tag("TEST").i("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
+            parseMessage(chat.id, it.toString().trim(), readLines.size)
         } ?: Timber.tag("TEST").i("파싱 완료 후 message is null")
     }
 
-    private suspend fun parseMessage(msg: String) {
-
+    private suspend fun parseMessage(chatId: String, msg: String, currentLine: Int) {
+        if (msg.isPassedInOutMessage()) return
+        val firstSplitIndex = msg.indexOf(" : ")
+        val dateAndName = msg.split(" : ")[0]
+        val dateTime = dateAndName.split(", ")[0].toLocalDateTime()
+        val userName = dateAndName.split(", ")[1]
+        val content = msg.substring(firstSplitIndex + 3)
+        val message = Message(
+            chatId = chatId,
+            dateTime = dateTime,
+            userName = userName,
+            content = content,
+            hour = dateTime.hour
+        )
+        messageRepository.saveMessage(message)
+        wordRepository.saveWords(message.parseContentToWords())
+        chatRepository.updateProgress(chatId, currentLine)
     }
-
 
 }

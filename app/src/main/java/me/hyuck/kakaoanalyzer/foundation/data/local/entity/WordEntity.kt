@@ -7,13 +7,21 @@ import java.util.*
 
 @Entity(
 	tableName = "words",
-	foreignKeys = [ForeignKey(
-		entity = ChatEntity::class,
-		parentColumns = ["chatId"],
-		childColumns = ["chatId"],
-		onDelete = CASCADE
-	)],
-	indices = [Index(value = ["chatId"])]
+	foreignKeys = [
+		ForeignKey(
+			entity = ChatEntity::class,
+			parentColumns = ["chatId"],
+			childColumns = ["chatId"],
+			onDelete = CASCADE
+		),
+		ForeignKey(
+			entity = MessageEntity::class,
+			parentColumns = ["messageId"],
+			childColumns = ["messageId"],
+			onDelete = CASCADE
+		)
+	],
+	indices = [Index(value = ["chatId", "messageId"])]
 )
 data class WordEntity(
 	@PrimaryKey
@@ -21,6 +29,8 @@ data class WordEntity(
 	val id: String = UUID.randomUUID().toString(),
 	@ColumnInfo(name = "chatId")
 	val chatId: String,
+	@ColumnInfo(name = "messageId")
+	val messageId: String,
 	@ColumnInfo(name = "userName")
 	val userName: String,
 	@ColumnInfo(name = "word")
