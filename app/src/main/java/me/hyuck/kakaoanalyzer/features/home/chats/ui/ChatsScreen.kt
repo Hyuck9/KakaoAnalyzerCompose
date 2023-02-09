@@ -24,6 +24,7 @@ import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoYellow
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.NewProgressChatItemCell
 import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.runtime.MainActivity
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,6 +108,7 @@ private fun GoToKakaoTalkButton(
 				startActivity(
 					packageManager.getLaunchIntentForPackage("com.kakao.talk")
 				)
+				(context as? MainActivity)?.finish()
 			}
 		},
 		containerColor = KakaoYellow

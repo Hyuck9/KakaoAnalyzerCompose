@@ -40,7 +40,8 @@ class SplashActivity : ComponentActivity() {
 				}
 			}
 		}
-		startMainActivity()
+		startActivity(intentFor<MainActivity>())
+		finish()
 	}
 
 	private fun copyToLocalFile(uri: Uri) {
@@ -55,14 +56,6 @@ class SplashActivity : ComponentActivity() {
 			}
 		}
 	}
-
-	private fun startMainActivity() = startActivity(
-		intentFor<MainActivity> {
-			flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-					Intent.FLAG_ACTIVITY_CLEAR_TASK or
-					Intent.FLAG_ACTIVITY_CLEAR_TOP
-		}
-	)
 
 	/*private fun storagePermissionCheck(): Boolean = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 		checkSelfPermission(Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED &&
