@@ -18,6 +18,14 @@ interface ChatDao {
 	@Query("SELECT * FROM chats")
 	fun observeChats(): Flow<List<ChatEntity>>
 
+	@Query("SELECT a.chatId, a.chatTitle, a.chatStatus," +
+			" a.saveDate, a.fileSize, a.filePath, IFNULL(MAX(b.lineNumber), 0) AS analysisLine," +
+			" a.lineSize, a.startDate, a.endDate, a.createdAt, a.updatedAt" +
+			" FROM chats a" +
+			" LEFT JOIN messages b ON a.chatId = b.chatId" +
+			" GROUP BY a.chatId")
+	fun observeChatsTest(): Flow<List<ChatEntity>>
+
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun saveChat(chatEntity: ChatEntity)
 

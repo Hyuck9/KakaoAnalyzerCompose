@@ -12,6 +12,7 @@ import me.hyuck.kakaoanalyzer.foundation.extension.toLocalDateTime
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import me.hyuck.kakaoanalyzer.model.Message
+import me.hyuck.kakaoanalyzer.model.Word
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -24,7 +25,13 @@ class ChatsEnvironment @Inject constructor(
 
     private val txtFileName = "KakaoTalkChats.txt"
 
+    private lateinit var messages: MutableList<Message>
+    private lateinit var words: MutableList<Word>
+
     override fun getChatList(): Flow<List<Chat>> = chatRepository.getChats()
+
+    // TODO: 테스트 후 function 정리
+    override suspend fun getMaxLine(chatId: String): Int = messageRepository.getMaxLine(chatId)
 
     override suspend fun fileScan(localFilesDir: File) {
         val files = localFilesDir.listFiles()
@@ -38,6 +45,7 @@ class ChatsEnvironment @Inject constructor(
         chatRepository.updateStatus(chat.id, ChatStatus.IN_PROGRESS)
         try {
             parseFile(chat)
+            saveAndFlushMessagesAndWords()
             chatRepository.updateStatus(chat.id, ChatStatus.ANALYSIS_COMPLETE)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -73,6 +81,8 @@ class ChatsEnvironment @Inject constructor(
 
     @Throws(Exception::class)
     private suspend fun parseFile(chat: Chat) {
+        messages = mutableListOf()
+        words = mutableListOf()
         val chatFile = File(chat.path)
         val readLines = chatFile.readLines()
         var message: StringBuilder? = null
@@ -114,9 +124,22 @@ class ChatsEnvironment @Inject constructor(
             content = content,
             hour = dateTime.hour
         )
-        messageRepository.saveMessage(message)
-        wordRepository.saveWords(message.parseContentToWords())
-        chatRepository.updateProgress(chatId, currentLine)
+//        messageRepository.saveMessage(message)
+//        wordRepository.saveWords(message.parseContentToWords())
+//        chatRepository.updateProgress(chatId, currentLine)
+        // TODO: 너무 많은 데이터를 한번에 저장하면 중간에 GC가 계속 일어나기 때문에 모아서 저장 후 list flush --> 테스트 중
+        if (messages.size > 300 || words.size > 500) {
+            saveAndFlushMessagesAndWords()
+        }
+        messages.add(message)
+        words.addAll(message.parseContentToWords())
+    }
+
+    private suspend fun saveAndFlushMessagesAndWords() {
+        messageRepository.saveMessages(messages)
+        wordRepository.saveWords(words)
+        messages = mutableListOf()
+        words = mutableListOf()
     }
 
 }

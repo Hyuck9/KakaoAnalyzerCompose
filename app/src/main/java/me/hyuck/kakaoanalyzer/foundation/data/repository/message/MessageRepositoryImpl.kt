@@ -11,6 +11,11 @@ class MessageRepositoryImpl(
 	private val ioDispatcher: CoroutineDispatcher
 ) : MessageRepository {
 
+	// TODO: 테스트 후 function 정리
+	override suspend fun getMaxLine(chatId: String): Int {
+		return messageDao.getMaxLine(chatId) ?: 0
+	}
+
 	override suspend fun saveMessages(messages: List<Message>) {
 		messageDao.saveMessages(messages.toMessageEntities())
 	}

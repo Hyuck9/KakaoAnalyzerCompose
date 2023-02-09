@@ -19,6 +19,12 @@ class ChatsViewModel @Inject constructor(
     private fun initChats() {
         viewModelScope.launch {
             environment.getChatList().collect {
+//                it.forEach {  chat ->
+//                    Timber.tag("TEST").i("$chat, MaxLine : ${environment.getMaxLine(chat.id)}")
+//                }
+//                val test = it.map { chat ->
+//                    chat.copy(analysisLine = environment.getMaxLine(chat.id))
+//                }
                 setState { copy(items = it.toMutableList()) }
             }
         }
