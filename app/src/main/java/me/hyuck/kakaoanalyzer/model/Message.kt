@@ -11,6 +11,7 @@ data class Message(
 	val chatId: String,
 	val dateTime: LocalDateTime,
 	val userName: String,
+	val lineNumber: Int,
 	val content: String,
 	val hour: Int
 ) {

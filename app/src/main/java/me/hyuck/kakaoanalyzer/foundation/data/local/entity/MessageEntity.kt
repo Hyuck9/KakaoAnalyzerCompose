@@ -25,6 +25,8 @@ data class MessageEntity(
 	val dateTime: LocalDateTime,
 	@ColumnInfo(name = "userName")
 	val userName: String,
+	@ColumnInfo(name = "lineNumber")
+	val lineNumber: Int,
 	@ColumnInfo(name = "content")
 	val content: String,
 	@ColumnInfo(name = "hour")

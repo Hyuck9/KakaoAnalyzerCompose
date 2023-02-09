@@ -9,6 +9,7 @@ fun MessageEntity.toMessage(): Message {
 		chatId = chatId,
 		dateTime = dateTime,
 		userName = userName,
+		lineNumber = lineNumber,
 		content = content,
 		hour = hour
 	)
@@ -20,6 +21,7 @@ fun Message.toMessageEntity(): MessageEntity {
 		chatId = chatId,
 		dateTime = dateTime,
 		userName = userName,
+		lineNumber = lineNumber,
 		content = content,
 		hour = hour
 	)

@@ -110,6 +110,7 @@ class ChatsEnvironment @Inject constructor(
             chatId = chatId,
             dateTime = dateTime,
             userName = userName,
+            lineNumber = currentLine,
             content = content,
             hour = dateTime.hour
         )
