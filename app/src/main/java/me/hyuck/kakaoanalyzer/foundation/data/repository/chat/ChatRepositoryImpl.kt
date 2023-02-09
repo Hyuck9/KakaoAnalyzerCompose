@@ -1,4 +1,4 @@
-package me.hyuck.kakaoanalyzer.foundation.data.repository
+package me.hyuck.kakaoanalyzer.foundation.data.repository.chat
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

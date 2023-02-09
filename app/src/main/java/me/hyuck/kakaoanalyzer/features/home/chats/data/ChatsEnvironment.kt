@@ -1,9 +1,10 @@
 package me.hyuck.kakaoanalyzer.features.home.chats.data
 
-import android.os.Environment
 import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.local.entity.ChatEntity
-import me.hyuck.kakaoanalyzer.foundation.data.repository.ChatRepository
+import me.hyuck.kakaoanalyzer.foundation.data.repository.chat.ChatRepository
+import me.hyuck.kakaoanalyzer.foundation.data.repository.message.MessageRepository
+import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
 import me.hyuck.kakaoanalyzer.foundation.extension.isFirstDateTimeMessage
 import me.hyuck.kakaoanalyzer.foundation.extension.isNotDateTimeMessage
 import me.hyuck.kakaoanalyzer.foundation.extension.toLocalDateTime
@@ -14,10 +15,11 @@ import java.io.File
 import javax.inject.Inject
 
 class ChatsEnvironment @Inject constructor(
-    private val chatRepository: ChatRepository
+    private val chatRepository: ChatRepository,
+    private val messageRepository: MessageRepository,
+    private val wordRepository: WordRepository,
 ) : IChatsEnvironment {
 
-    private val txtFilePath = Environment.getExternalStorageDirectory().absolutePath + "/KakaoTalk/Chats"
     private val txtFileName = "KakaoTalkChats.txt"
 
     override fun getChatList(): Flow<List<Chat>> = chatRepository.getChats()
@@ -94,6 +96,10 @@ class ChatsEnvironment @Inject constructor(
         message?.let {
             Timber.tag("TEST").i("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
         } ?: Timber.tag("TEST").i("파싱 완료 후 message is null")
+    }
+
+    private suspend fun parseMessage(msg: String) {
+
     }
 
 
