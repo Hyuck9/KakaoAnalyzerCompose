@@ -21,10 +21,7 @@ class ChatRepositoryImpl(
 
 	override fun getChats(): Flow<List<Chat>> {
 //		return chatDao.observeChats().map {
-		return chatDao.observeChatsTest().map {
-			// TODO: 테스트 이후 function 정리
-			it.toChats()
-		}
+		return chatDao.observeChatsTest()
 	}
 
 	override suspend fun saveChat(chatEntity: ChatEntity) = withContext(ioDispatcher) {

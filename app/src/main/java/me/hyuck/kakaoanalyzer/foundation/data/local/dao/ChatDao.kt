@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.local.entity.ChatEntity
+import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import java.time.LocalDateTime
 
@@ -18,13 +19,20 @@ interface ChatDao {
 	@Query("SELECT * FROM chats")
 	fun observeChats(): Flow<List<ChatEntity>>
 
-	@Query("SELECT a.chatId, a.chatTitle, a.chatStatus," +
+	/*@Query("SELECT a.chatId, a.chatTitle, a.chatStatus," +
 			" a.saveDate, a.fileSize, a.filePath, IFNULL(MAX(b.lineNumber), 0) AS analysisLine," +
 			" a.lineSize, a.startDate, a.endDate, a.createdAt, a.updatedAt" +
 			" FROM chats a" +
 			" LEFT JOIN messages b ON a.chatId = b.chatId" +
+			" GROUP BY a.chatId")*/
+	@Query("SELECT a.chatId AS id, a.chatTitle AS title, a.chatStatus as status," +
+			" a.saveDate, a.fileSize, a.filePath as path, IFNULL(MAX(b.lineNumber), 0) AS analysisLine," +
+			" a.lineSize, a.startDate, a.endDate, a.createdAt, a.updatedAt," +
+			" ((IFNULL(MAX(b.lineNumber), 0) * 1.0 ) / a.lineSize * 100.0) AS progress" +
+			" FROM chats a" +
+			" LEFT JOIN messages b ON a.chatId = b.chatId" +
 			" GROUP BY a.chatId")
-	fun observeChatsTest(): Flow<List<ChatEntity>>
+	fun observeChatsTest(): Flow<List<Chat>>
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun saveChat(chatEntity: ChatEntity)

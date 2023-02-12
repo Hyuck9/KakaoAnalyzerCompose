@@ -5,10 +5,7 @@ import me.hyuck.kakaoanalyzer.foundation.data.local.entity.ChatEntity
 import me.hyuck.kakaoanalyzer.foundation.data.repository.chat.ChatRepository
 import me.hyuck.kakaoanalyzer.foundation.data.repository.message.MessageRepository
 import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
-import me.hyuck.kakaoanalyzer.foundation.extension.isFirstDateTimeMessage
-import me.hyuck.kakaoanalyzer.foundation.extension.isNotDateTimeMessage
-import me.hyuck.kakaoanalyzer.foundation.extension.isPassedInOutMessage
-import me.hyuck.kakaoanalyzer.foundation.extension.toLocalDateTime
+import me.hyuck.kakaoanalyzer.foundation.extension.*
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import me.hyuck.kakaoanalyzer.model.Message
@@ -127,8 +124,7 @@ class ChatsEnvironment @Inject constructor(
 //        messageRepository.saveMessage(message)
 //        wordRepository.saveWords(message.parseContentToWords())
 //        chatRepository.updateProgress(chatId, currentLine)
-        // TODO: 너무 많은 데이터를 한번에 저장하면 중간에 GC가 계속 일어나기 때문에 모아서 저장 후 list flush --> 테스트 중
-        if (messages.size > 300 || words.size > 500) {
+        if (messages.size > 3000 || words.size > 5000) {
             saveAndFlushMessagesAndWords()
         }
         messages.add(message)
@@ -136,6 +132,8 @@ class ChatsEnvironment @Inject constructor(
     }
 
     private suspend fun saveAndFlushMessagesAndWords() {
+        testLog("messages : ${messages.size}")
+        testLog("words : ${words.size}")
         messageRepository.saveMessages(messages)
         wordRepository.saveWords(words)
         messages = mutableListOf()

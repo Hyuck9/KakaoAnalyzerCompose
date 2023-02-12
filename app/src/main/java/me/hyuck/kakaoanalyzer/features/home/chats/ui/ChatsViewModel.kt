@@ -5,6 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.home.chats.data.IChatsEnvironment
+import me.hyuck.kakaoanalyzer.foundation.extension.testLog
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +21,7 @@ class ChatsViewModel @Inject constructor(
         viewModelScope.launch {
             environment.getChatList().collect {
 //                it.forEach {  chat ->
-//                    Timber.tag("TEST").i("$chat, MaxLine : ${environment.getMaxLine(chat.id)}")
+//                    testLog("$chat, MaxLine : ${environment.getMaxLine(chat.id)}")
 //                }
 //                val test = it.map { chat ->
 //                    chat.copy(analysisLine = environment.getMaxLine(chat.id))

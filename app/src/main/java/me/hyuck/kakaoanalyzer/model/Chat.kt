@@ -3,6 +3,7 @@ package me.hyuck.kakaoanalyzer.model
 import me.hyuck.kakaoanalyzer.foundation.extension.parseMemory
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.math.roundToInt
 
 data class Chat(
     val id: String = UUID.randomUUID().toString(),
@@ -17,9 +18,10 @@ data class Chat(
     val endDate: LocalDateTime = LocalDateTime.now(),
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
+    val progress: Float = 0f
 ) {
     val fileSizeUnit: String get() = fileSize.parseMemory()
-    val progress: Float get() {
-        return analysisLine.toFloat() / lineSize.toFloat() * 100f
-    }
+//    val progress: Float get() {
+//        return (analysisLine.toFloat() / lineSize.toFloat() * 100f).roundToInt().toFloat()
+//    }
 }
