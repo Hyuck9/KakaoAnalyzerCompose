@@ -86,7 +86,6 @@ dependencies {
 
     // Library
     implementation(Dependencies.composeProgressItem)
-    implementation(Dependencies.tedPermission)
 
     // Logging
     implementation(Dependencies.timber)
