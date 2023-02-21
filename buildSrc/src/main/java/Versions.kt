@@ -31,7 +31,6 @@ object Versions {
 
     // Library
     const val progressItem = "0.0.1"
-    const val tedPermission = "3.3.0"
 
     // Logging
     const val timber = "5.0.1"
