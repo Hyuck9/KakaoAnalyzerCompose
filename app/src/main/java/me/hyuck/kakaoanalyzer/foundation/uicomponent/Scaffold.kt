@@ -21,3 +21,17 @@ fun KakaoAnalyzerScaffold(
         content = content
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun StatisticScaffold(
+    modifier: Modifier = Modifier,
+    topBar: @Composable (() -> Unit) = {},
+    content: @Composable (PaddingValues) -> Unit
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = topBar,
+        content = content
+    )
+}

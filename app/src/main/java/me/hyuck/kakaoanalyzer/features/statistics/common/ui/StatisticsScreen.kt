@@ -4,9 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -14,16 +12,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 
 @Composable
 fun StatisticsScreen(
     chatId: String,
     upPress: () -> Unit
 ) {
-    Box(Modifier.fillMaxSize()) {
-        Header()
-        Text(text = "StatisticalBasic  - $chatId")
-        Up(upPress)
+    StatisticScaffold(
+        topBar = {
+            IconButton(onClick = upPress) {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowBack,
+                    tint = KakaoAnalyzerTheme.colors.iconInteractive,
+                    contentDescription = stringResource(id = R.string.label_back)
+                )
+            }
+        }
+    ) {
+        Text(
+            modifier = Modifier.padding(it),
+            text = "Statistics  - $chatId"
+        )
     }
 }
 

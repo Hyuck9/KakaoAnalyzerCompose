@@ -4,7 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material.LocalContentColor
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -22,44 +22,44 @@ import kotlin.math.ln
 
 @Composable
 fun KakaoAnalyzerSurface(
-	modifier: Modifier = Modifier,
-	shape: Shape = RectangleShape,
-	color: Color = MaterialTheme.colorScheme.surface,           // TODO: 추후 테마 재정의해서 컬러셋 변경
-	contentColor: Color = MaterialTheme.colorScheme.onSurface,  // TODO: 추후 테마 재정의해서 컬러셋 변경
-	border: BorderStroke? = null,
-	elevation: Dp = 0.dp,
-	content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    shape: Shape = RectangleShape,
+    color: Color = MaterialTheme.colorScheme.surface,           // TODO: 추후 테마 재정의해서 컬러셋 변경
+    contentColor: Color = MaterialTheme.colorScheme.onSurface,  // TODO: 추후 테마 재정의해서 컬러셋 변경
+    border: BorderStroke? = null,
+    elevation: Dp = 0.dp,
+    content: @Composable () -> Unit
 ) {
-	Box(
-		modifier = modifier
-			.shadow(elevation = elevation, shape = shape, clip = false)
-			.zIndex(elevation.value)
-			.then(
-				if (border != null) Modifier.border(
-					border,
-					shape
-				) else Modifier
-			)
-			.background(
-				color = getBackgroundColorForElevation(color, elevation),
-				shape = shape
-			)
-			.clip(shape)
-	) {
-		CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
-	}
+    Box(
+        modifier = modifier
+            .shadow(elevation = elevation, shape = shape, clip = false)
+            .zIndex(elevation.value)
+            .then(
+                if (border != null) Modifier.border(
+                    border,
+                    shape
+                ) else Modifier
+            )
+            .background(
+                color = getBackgroundColorForElevation(color, elevation),
+                shape = shape
+            )
+            .clip(shape)
+    ) {
+        CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
+    }
 }
 
 @Composable
 private fun getBackgroundColorForElevation(color: Color, elevation: Dp): Color {
-	return if (elevation > 0.dp // && https://issuetracker.google.com/issues/161429530
-	// JetsnackTheme.colors.isDark //&&
-	// color == JetsnackTheme.colors.uiBackground
-	) {
-		color.withElevation(elevation)
-	} else {
-		color
-	}
+    return if (elevation > 0.dp // && https://issuetracker.google.com/issues/161429530
+    // JetsnackTheme.colors.isDark //&&
+    // color == JetsnackTheme.colors.uiBackground
+    ) {
+        color.withElevation(elevation)
+    } else {
+        color
+    }
 }
 
 /**
@@ -69,8 +69,8 @@ private fun getBackgroundColorForElevation(color: Color, elevation: Dp): Color {
  * TODO: Remove when public https://issuetracker.google.com/155181601
  */
 private fun Color.withElevation(elevation: Dp): Color {
-	val foreground = calculateForeground(elevation)
-	return foreground.compositeOver(this)
+    val foreground = calculateForeground(elevation)
+    return foreground.compositeOver(this)
 }
 
 /**
@@ -78,6 +78,6 @@ private fun Color.withElevation(elevation: Dp): Color {
  * the resultant color.
  */
 private fun calculateForeground(elevation: Dp): Color {
-	val alpha = ((4.5f * ln(elevation.value + 1)) + 2f) / 100f
-	return Color.White.copy(alpha = alpha)
+    val alpha = ((4.5f * ln(elevation.value + 1)) + 2f) / 100f
+    return Color.White.copy(alpha = alpha)
 }
