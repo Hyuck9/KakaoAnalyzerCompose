@@ -1,18 +1,15 @@
 package me.hyuck.kakaoanalyzer.features.statistics.common.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import me.hyuck.kakaoanalyzer.R
-import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
 
 @Composable
 fun StatisticsScreen(
@@ -21,13 +18,10 @@ fun StatisticsScreen(
 ) {
     StatisticScaffold(
         topBar = {
-            IconButton(onClick = upPress) {
-                Icon(
-                    imageVector = Icons.Outlined.ArrowBack,
-                    tint = KakaoAnalyzerTheme.colors.iconInteractive,
-                    contentDescription = stringResource(id = R.string.label_back)
-                )
-            }
+            StatisticsBackHeader(
+                onClickBack = upPress,
+                onClickShare = {}
+            )
         }
     ) {
         Text(
@@ -37,23 +31,14 @@ fun StatisticsScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun Header() {
-    Spacer(
-        modifier = Modifier
-            .height(280.dp)
-            .fillMaxWidth()
-            .background(Brush.horizontalGradient(KakaoAnalyzerTheme.colors.tornado1))
-    )
-}
+fun ViewPagerWithTab(
+    modifier: Modifier = Modifier
+) {
+    val pagerState = rememberPagerState()
+    val coroutineScope = rememberCoroutineScope()
+    Column {
 
-@Composable
-private fun Up(upPress: () -> Unit) {
-    IconButton(onClick = upPress) {
-        Icon(
-            imageVector = Icons.Outlined.ArrowBack,
-            tint = KakaoAnalyzerTheme.colors.iconInteractive,
-            contentDescription = stringResource(id = R.string.label_back)
-        )
     }
 }

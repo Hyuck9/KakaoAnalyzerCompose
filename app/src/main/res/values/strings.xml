@@ -8,4 +8,5 @@
     <string name="fab_kakao_talk">카카오톡 실행하기</string>
 
     <string name="label_back">Back</string>
+    <string name="title_statistics">분석결과</string>
 </resources>
