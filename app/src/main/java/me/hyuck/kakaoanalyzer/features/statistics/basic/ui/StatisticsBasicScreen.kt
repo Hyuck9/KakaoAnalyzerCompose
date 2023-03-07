@@ -16,7 +16,7 @@ import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 
 @Composable
-fun StatisticalBasicScreen(
+fun StatisticsBasicScreen(
     chatId: String,
     upPress: () -> Unit
 ) {

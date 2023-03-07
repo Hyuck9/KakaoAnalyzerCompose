@@ -7,7 +7,7 @@ import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsScreen
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsViewModel
 import me.hyuck.kakaoanalyzer.features.home.guide.ui.GuideScreen
 import me.hyuck.kakaoanalyzer.features.home.settings.ui.SettingsScreen
-import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticalBasicScreen
+import me.hyuck.kakaoanalyzer.features.statistics.common.ui.StatisticsScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations
 
@@ -28,7 +28,7 @@ fun NavGraphBuilder.kakaoAnalyzerNavHost(
         val arguments = requireNotNull(navBackStackEntry.arguments)
         arguments.getString(MainDestinations.CHAT_ID_KEY)
         ?.let { chatId ->
-            StatisticalBasicScreen(chatId, upPress)
+            StatisticsScreen(chatId, upPress)
         }
     }
 }
