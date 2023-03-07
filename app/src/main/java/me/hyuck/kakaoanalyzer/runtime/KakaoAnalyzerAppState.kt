@@ -18,6 +18,8 @@ import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
 
 object MainDestinations {
     const val HOME_ROUTE = "home"
+    const val CHAT_DETAIL_ROUTE = "chat"
+    const val CHAT_ID_KEY = "chatId"
 }
 
 @Composable
@@ -70,10 +72,10 @@ class KakaoAnalyzerAppState(
         }
     }
 
-    fun navigateToSnackDetail(snackId: Long, from: NavBackStackEntry) {
+    fun navigateToStatisticalChat(chatId: String, from: NavBackStackEntry) {
         // In order to discard duplicated navigation events, we check the Lifecycle
         if (from.lifecycleIsResumed()) {
-            // navController.navigate("${MainDestinations.SNACK_DETAIL_ROUTE}/$snackId")
+            navController.navigate("${MainDestinations.CHAT_DETAIL_ROUTE}/$chatId")
         }
     }
 }

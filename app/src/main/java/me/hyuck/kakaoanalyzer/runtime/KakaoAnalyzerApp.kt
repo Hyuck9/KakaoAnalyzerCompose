@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.KakaoAnalyzerBottomBar
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.KakaoAnalyzerScaffold
-import me.hyuck.kakaoanalyzer.runtime.navigation.addHomeGraph
+import me.hyuck.kakaoanalyzer.runtime.navigation.kakaoAnalyzerNavHost
 
 @Composable
 fun KakaoAnalyzerApp() {
@@ -40,7 +40,10 @@ fun KakaoAnalyzerApp() {
                 startDestination = MainDestinations.HOME_ROUTE,
                 modifier = Modifier.padding(innerPaddingModifier)
             ) {
-                addHomeGraph()
+                kakaoAnalyzerNavHost(
+                    onChatSelected = appState::navigateToStatisticalChat,
+                    upPress = appState::upPress
+                )
             }
         }
     }

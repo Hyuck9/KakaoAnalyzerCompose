@@ -30,7 +30,8 @@ import me.hyuck.kakaoanalyzer.runtime.MainActivity
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatsScreen(
-	viewModel: ChatsViewModel
+	viewModel: ChatsViewModel,
+	onChatClick: (String) -> Unit
 ) {
 	val localFilesDir = LocalContext.current.filesDir
 	val state by viewModel.state.collectAsStateWithLifecycle()
@@ -52,7 +53,8 @@ fun ChatsScreen(
 			chats = state.chatItems,
 			onAnalyzeStart = {  chat ->
 				viewModel.dispatch(ChatsAction.AnalyzeChat(chat))
-			}
+			},
+			onChatClick = onChatClick
 		)
 	}
 
@@ -62,7 +64,8 @@ fun ChatsScreen(
 private fun ChatsContent(
 	modifier: Modifier = Modifier,
 	chats: List<ChatItem>,
-	onAnalyzeStart: (Chat) -> Unit
+	onAnalyzeStart: (Chat) -> Unit,
+	onChatClick: (String) -> Unit
 ) {
 	LazyColumn(
 		modifier = modifier
@@ -89,7 +92,7 @@ private fun ChatsContent(
 				is ChatItem.Complete -> {
 					NewProgressChatItemCell(
 						chat = item.chat,
-						onClick = {  }
+						onClick = { onChatClick(item.chat.id) }
 					)
 				}
 			}

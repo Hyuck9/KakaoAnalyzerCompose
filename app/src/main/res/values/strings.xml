@@ -6,4 +6,6 @@
     <string name="tab_settings">Settings</string>
 
     <string name="fab_kakao_talk">카카오톡 실행하기</string>
+
+    <string name="label_back">Back</string>
 </resources>
