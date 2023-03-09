@@ -6,11 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,7 +36,6 @@ fun StatisticsScreen(
         ViewPagerWithTab(
             modifier = Modifier.padding(it),
             tabs = state.statisticsTabs,
-            selectedTab = state.selectedTab,
             chatId = chatId
         )
     }
@@ -50,27 +46,25 @@ fun StatisticsScreen(
 fun ViewPagerWithTab(
     modifier: Modifier = Modifier,
     tabs: List<StatisticsTab>,
-    selectedTab: StatisticsTab,
     chatId: String
 ) {
-    val selectedIndex = tabs.indexOfFirst { it == selectedTab }
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
     Column(
-        modifier = modifier,
+        modifier = modifier
     ) {
         TabRow(
-            selectedTabIndex = selectedIndex,
+            selectedTabIndex = pagerState.currentPage,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    Modifier.tabIndicatorOffset(tabPositions[selectedIndex])
+                    Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage])
                 )
             }
         ) {
             tabs.forEachIndexed { index, statisticsTab ->
                 Tab(
-                    selected = index == selectedIndex,
+                    selected = index == pagerState.currentPage,
                     onClick = {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(index)
@@ -85,13 +79,16 @@ fun ViewPagerWithTab(
             }
         }
         HorizontalPager(
-            modifier = Modifier.fillMaxSize(),
             pageCount = tabs.count(),
             state = pagerState
         ) { page ->
-            Text(
-                text = "Statistics[${tabs[page].value}]  - $chatId"
-            )
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text(
+                    text = "Statistics[${tabs[page].value}]  - $chatId"
+                )
+            }
         }
     }
 

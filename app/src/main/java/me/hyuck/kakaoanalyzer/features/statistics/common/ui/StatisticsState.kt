@@ -5,6 +5,5 @@ import me.hyuck.kakaoanalyzer.model.StatisticsTab
 
 @Immutable
 data class StatisticsState(
-	val selectedTab: StatisticsTab = StatisticsTab.BASIC,
-	val statisticsTabs: List<StatisticsTab> =  emptyList()
+	val statisticsTabs: List<StatisticsTab> =  StatisticsTab.values().asList()
 )
