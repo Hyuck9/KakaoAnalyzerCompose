@@ -14,17 +14,11 @@ import java.time.LocalDateTime
 interface ChatDao {
 
 	@Query("SELECT COUNT(*) FROM chats WHERE chatId = :chatId")
-	suspend fun getChatById(chatId: String): Int
+	suspend fun countChatById(chatId: String): Int
 
-	@Query("SELECT * FROM chats")
-	fun observeChats(): Flow<List<ChatEntity>>
+	@Query("SELECT * FROM chats WHERE chatId = :chatId")
+	fun observeChatById(chatId: String): Flow<ChatEntity>
 
-	/*@Query("SELECT a.chatId, a.chatTitle, a.chatStatus," +
-			" a.saveDate, a.fileSize, a.filePath, IFNULL(MAX(b.lineNumber), 0) AS analysisLine," +
-			" a.lineSize, a.startDate, a.endDate, a.createdAt, a.updatedAt" +
-			" FROM chats a" +
-			" LEFT JOIN messages b ON a.chatId = b.chatId" +
-			" GROUP BY a.chatId")*/
 	@Query("SELECT a.chatId AS id, a.chatTitle AS title, a.chatStatus as status," +
 			" a.saveDate, a.fileSize, a.filePath as path, IFNULL(MAX(b.lineNumber), 0) AS analysisLine," +
 			" a.lineSize, a.startDate, a.endDate, a.createdAt, a.updatedAt," +
@@ -32,7 +26,7 @@ interface ChatDao {
 			" FROM chats a" +
 			" LEFT JOIN messages b ON a.chatId = b.chatId" +
 			" GROUP BY a.chatId")
-	fun observeChatsTest(): Flow<List<Chat>>
+	fun observeChats(): Flow<List<Chat>>
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun saveChat(chatEntity: ChatEntity)

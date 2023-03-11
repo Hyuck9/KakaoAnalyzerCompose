@@ -54,7 +54,7 @@ class ChatsEnvironment @Inject constructor(
 
     private suspend fun saveChat(chatFile: File) {
         val chatId = chatFile.parentFile?.name ?: return
-        if (chatRepository.getChatById(chatId) > 0) return
+        if (chatRepository.countChatById(chatId) > 0) return
         try {
             val readLines = chatFile.readLines()
             if (readLines.size > 5) {

@@ -7,9 +7,11 @@ import me.hyuck.kakaoanalyzer.model.ChatStatus
 
 interface ChatRepository {
 
-	suspend fun getChatById(chatId: String): Int
+	suspend fun countChatById(chatId: String): Int
 
 	fun getChats(): Flow<List<Chat>>
+
+	fun getChatById(chatId: String): Flow<Chat>
 
 	suspend fun saveChat(chatEntity: ChatEntity)
 
