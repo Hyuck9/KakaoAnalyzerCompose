@@ -18,3 +18,7 @@ fun Long.toLocalDateTime(): LocalDateTime {
 fun String.toLocalDateTime(): LocalDateTime {
 	return LocalDateTime.parse(this, DateTimeFormatter.ofPattern("yyyy년 M월 d일 a h:mm"))
 }
+
+fun LocalDateTime.toFormatString(format: String): String {
+	return format(DateTimeFormatter.ofPattern(format))
+}
