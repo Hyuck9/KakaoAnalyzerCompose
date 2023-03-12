@@ -15,8 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.SelectorButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
@@ -98,9 +100,19 @@ fun TabbedViewPagerContent(
             Surface(
                 modifier = Modifier.fillMaxSize()
             ) {
-                Text(
-                    text = "Statistics[${tabs[page].value}]  - $chatId"
-                )
+                when(tabs[page]) {
+                    StatisticsTab.BASIC -> {
+                        StatisticsBasicScreen(
+                            viewModel = hiltViewModel(),
+                            chat = chat
+                        )
+                    }
+                    else -> {
+                        Text(
+                            text = "Statistics[${tabs[page].value}]  - $chatId"
+                        )
+                    }
+                }
             }
         }
     }

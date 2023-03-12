@@ -1,7 +1,10 @@
 package me.hyuck.kakaoanalyzer.foundation.data.repository.word
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import me.hyuck.kakaoanalyzer.foundation.data.local.dao.WordDao
+import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Word
 import me.hyuck.kakaoanalyzer.model.mapper.toWordEntities
 
@@ -10,7 +13,11 @@ class WordRepositoryImpl(
 	private val ioDispatcher: CoroutineDispatcher
 ) : WordRepository {
 
-	override suspend fun saveWords(words: List<Word>) {
+	override fun countKeywordById(chat: Chat): Flow<Int> {
+		return wordDao.countKeywordById(chat.id, chat.startDate, chat.endDate)
+	}
+
+	override suspend fun saveWords(words: List<Word>) = withContext(ioDispatcher) {
 		wordDao.saveWords(words.toWordEntities())
 	}
 
