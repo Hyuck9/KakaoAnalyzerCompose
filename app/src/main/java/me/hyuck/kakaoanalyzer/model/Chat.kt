@@ -23,4 +23,5 @@ data class Chat(
     val fileSizeUnit: String get() = fileSize.parseMemory()
     val startDateString: String get() = startDate.toFormatString("yyyy-MM-dd")
     val endDateString: String get() = endDate.toFormatString("yyyy-MM-dd")
+    val period: String get() = "$startDateString ~ $endDateString"
 }
