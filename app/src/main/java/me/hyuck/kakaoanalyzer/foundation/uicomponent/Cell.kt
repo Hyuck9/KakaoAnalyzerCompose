@@ -1,24 +1,29 @@
 package me.hyuck.kakaoanalyzer.foundation.uicomponent
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.hyuck9.progressitem.ProgressItem
+import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.ProgressBackground
 import me.hyuck.kakaoanalyzer.model.Chat
@@ -71,68 +76,114 @@ fun NewProgressChatItemCell(
     }
 }
 
+//@Composable
+//fun ProgressChatItemCell(
+//    modifier: Modifier = Modifier,
+//    percent: Float,
+//) {
+//    ProgressItem(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .shadow(elevation = 3.dp, shape = ChatItemShape)
+//            .clip(ChatItemShape)
+//            .background(ProgressBackground),
+//        brush = Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2),
+//        percent = percent
+//    ) {
+//        Column(
+//            modifier = Modifier
+//                .padding(vertical = 16.dp, horizontal = 8.dp)
+//        ) {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+//            ) {
+//                Text(
+//                    modifier = Modifier.weight(1f),
+//                    text = "가나다라마바사",
+//                    style = MaterialTheme.typography.titleLarge,
+//                )
+//                Text(text = "123M")
+//            }
+//            Text(text = "2023-01-30")
+//        }
+//    }
+//}
+
 @Composable
-fun ProgressChatItemCell(
-    modifier: Modifier = Modifier,
-    percent: Float,
+fun StatisticsItemCell(
+    @StringRes titleRssId: Int,
+    content: String,
+    shape: Shape = RectangleShape
 ) {
-    ProgressItem(
-        modifier = modifier
+    Surface(
+        modifier = Modifier
             .fillMaxWidth()
-            .shadow(elevation = 3.dp, shape = ChatItemShape)
-            .clip(ChatItemShape)
-            .background(ProgressBackground),
-        brush = Brush.horizontalGradient(KakaoAnalyzerTheme.colors.gradient2_2),
-        percent = percent
+            .padding(bottom = 1.dp),
+        shadowElevation = 5.dp,
+        shape = shape
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .padding(vertical = 16.dp, horizontal = 8.dp)
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                Text(
-                    modifier = Modifier.weight(1f),
-                    text = "가나다라마바사",
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                Text(text = "123M")
-            }
-            Text(text = "2023-01-30")
-        }
-    }
-}
-
-
-
-
-@Preview(showBackground = true)
-@Composable
-private fun NewProgressChatItemCellPreview() {
-    KakaoAnalyzerTheme {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            NewProgressChatItemCell(
-                chat = Chat(
-                    title = "주현욱 님과 카카오톡 대화",
-                    saveDate = "저장한 날짜 : 2023년 2월 7일 오후 1:25",
-                    fileSize = 160_192
-                ),
-                onClick = {}
+            Text(
+                text = stringResource(id = titleRssId),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = content,
+                color = Color.Gray,                 // TODO: 추후 테마 반영해서 컬러 변경
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     }
 }
-@Preview(showBackground = true)
+
+
+
+
+
+@Preview
 @Composable
-private fun ProgressChatItemCellPreview() {
+private fun StatisticsItemCellPreview() {
     KakaoAnalyzerTheme {
-        ProgressChatItemCell(
-            percent = 60f
+        StatisticsItemCell(
+            titleRssId = R.string.sub_title_period,
+            content = "2022-04-04 ~ 2023-03-13"
         )
     }
 }
+
+
+//@Preview(showBackground = true)
+//@Composable
+//private fun NewProgressChatItemCellPreview() {
+//    KakaoAnalyzerTheme {
+//        Column(
+//            modifier = Modifier
+//                .padding(16.dp)
+//        ) {
+//            NewProgressChatItemCell(
+//                chat = Chat(
+//                    title = "주현욱 님과 카카오톡 대화",
+//                    saveDate = "저장한 날짜 : 2023년 2월 7일 오후 1:25",
+//                    fileSize = 160_192
+//                ),
+//                onClick = {}
+//            )
+//        }
+//    }
+//}
+//@Preview(showBackground = true)
+//@Composable
+//private fun ProgressChatItemCellPreview() {
+//    KakaoAnalyzerTheme {
+//        ProgressChatItemCell(
+//            percent = 60f
+//        )
+//    }
+//}

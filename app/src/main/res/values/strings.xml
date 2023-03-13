@@ -9,4 +9,15 @@
 
     <string name="label_back">Back</string>
     <string name="title_statistics">분석결과</string>
+
+    <string name="title_analysis_overview">분석 개요</string>
+
+    <string name="sub_title_period">분석 기간</string>
+    <string name="sub_title_message_count">총 채팅 횟수</string>
+    <string name="sub_title_user_count">대화자 수</string>
+    <string name="sub_title_keyword_count">분석한 키워드 수</string>
+
+    <string name="comma_number_times">%,d 회</string>
+    <string name="comma_number_persons">%,d 명</string>
+    <string name="comma_number_cases">%,d 건</string>
 </resources>
