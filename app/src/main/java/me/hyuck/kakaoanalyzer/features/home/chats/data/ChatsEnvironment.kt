@@ -88,11 +88,11 @@ class ChatsEnvironment @Inject constructor(
                 if (line.isFirstDateTimeMessage()) {
                     message?.let {
                         parseMessage(chat.id, it.toString().trim(), index + 1)
-                    } ?: Timber.tag("TEST").i("message is null")
+                    } ?: testLog("message is null")
                     message = StringBuilder(line)
                 } else {
                     if ( line.isNotDateTimeMessage() ) {
-                        if (line.isEmpty()) {   // 개행된 메시지 이므로 이전 메시지 뒤에 붙이기
+                        if (line.isNotEmpty()) {   // 개행된 메시지 이므로 이전 메시지 뒤에 붙이기
                             message?.append(" $line")
                         }
                     }
@@ -101,9 +101,9 @@ class ChatsEnvironment @Inject constructor(
         }
 
         message?.let {
-            Timber.tag("TEST").i("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
+            testLog("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
             parseMessage(chat.id, it.toString().trim(), readLines.size)
-        } ?: Timber.tag("TEST").i("파싱 완료 후 message is null")
+        } ?: testLog("파싱 완료 후 message is null")
     }
 
     private suspend fun parseMessage(chatId: String, msg: String, currentLine: Int) {
