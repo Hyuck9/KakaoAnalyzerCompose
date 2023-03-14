@@ -10,7 +10,6 @@ import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import me.hyuck.kakaoanalyzer.model.Message
 import me.hyuck.kakaoanalyzer.model.Word
-import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
