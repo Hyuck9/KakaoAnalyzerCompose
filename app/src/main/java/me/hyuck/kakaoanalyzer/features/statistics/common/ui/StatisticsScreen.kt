@@ -47,7 +47,9 @@ fun StatisticsScreen(
             modifier = Modifier.padding(it),
             chat = state.chat,
             tabs = state.statisticsTabs,
-            chatId = chatId
+            chatId = chatId,
+            onStartDateClick = { viewModel.testSTart() },
+            onEndDateClick = { viewModel.testEnd() }
         )
     }
 }
@@ -58,7 +60,9 @@ fun TabbedViewPagerContent(
     modifier: Modifier = Modifier,
     chat: Chat,
     tabs: List<StatisticsTab>,
-    chatId: String
+    chatId: String,
+    onStartDateClick: () -> Unit,
+    onEndDateClick: () -> Unit,
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -67,7 +71,11 @@ fun TabbedViewPagerContent(
         modifier = modifier
     ) {
         Surface {
-            StatisticsSelector(chat = chat)
+            StatisticsSelector(
+                chat = chat,
+                onStartDateClick = onStartDateClick,
+                onEndDateClick = onEndDateClick
+            )
         }
         TabRow(
             selectedTabIndex = pagerState.currentPage,
@@ -119,7 +127,11 @@ fun TabbedViewPagerContent(
 }
 
 @Composable
-fun StatisticsSelector(chat: Chat) {
+fun StatisticsSelector(
+    chat: Chat,
+    onStartDateClick: () -> Unit,
+    onEndDateClick: () -> Unit,
+) {
     Column {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -136,7 +148,7 @@ fun StatisticsSelector(chat: Chat) {
             DatePickerButton(
                 modifier = Modifier.weight(1f),
                 text = chat.startDateString,
-                onClick = {}
+                onClick = onStartDateClick
             )
             Text(
                 modifier = Modifier.padding(horizontal = 8.dp),
@@ -145,7 +157,7 @@ fun StatisticsSelector(chat: Chat) {
             DatePickerButton(
                 modifier = Modifier.weight(1f),
                 text = chat.endDateString,
-                onClick = {}
+                onClick = onEndDateClick
             )
         }
     }
@@ -166,7 +178,9 @@ private fun StatisticsSelectorPreview() {
                 title = "아빠 님과 카카오톡 대화",
                 startDate = LocalDateTime.now(),
                 endDate = LocalDateTime.now(),
-            )
+            ),
+            onStartDateClick = {},
+            onEndDateClick = {}
         )
     }
 }
@@ -181,6 +195,8 @@ private fun ViewPagerWithTabPreview() {
             endDate = LocalDateTime.now(),
         ),
         tabs = StatisticsTab.values().asList(),
-        chatId = "TEST"
+        chatId = "TEST",
+        onStartDateClick = {},
+        onEndDateClick = {}
     )
 }

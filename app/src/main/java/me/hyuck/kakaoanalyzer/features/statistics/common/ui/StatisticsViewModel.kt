@@ -32,6 +32,22 @@ class StatisticsViewModel @Inject constructor(
 		}
 	}
 
+	fun testSTart() {
+		setState { copy(
+			chat = chat.copy(
+				startDate = chat.startDate.plusDays(1)
+			)
+		) }
+	}
+
+	fun testEnd() {
+		setState { copy(
+			chat = chat.copy(
+				endDate = chat.endDate.minusDays(1)
+			)
+		) }
+	}
+
 	override fun dispatch(action: Unit) {
 
 	}
