@@ -80,6 +80,7 @@ dependencies {
     implementation(Dependencies.composeNavigation)
     implementation(Dependencies.composeRuntime)
     implementation(Dependencies.composeViewModel)
+    implementation(Dependencies.constraintLayout)
 
     // Splash
     implementation(Dependencies.splahScreen)

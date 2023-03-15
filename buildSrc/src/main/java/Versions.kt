@@ -14,6 +14,7 @@ object Versions {
     const val composeMaterial = "1.3.1"
     const val composeMaterial3 = "1.0.1"
     const val activityCompose = "1.6.1"
+    const val constraintLayout = "1.0.1"
 
     // Lifecycle components
     const val lifecycle = "2.5.1"
