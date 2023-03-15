@@ -19,7 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.SelectorButton
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.DatePickerButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
 import me.hyuck.kakaoanalyzer.model.Chat
@@ -133,7 +133,7 @@ fun StatisticsSelector(chat: Chat) {
                 .padding(horizontal = 32.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SelectorButton(
+            DatePickerButton(
                 modifier = Modifier.weight(1f),
                 text = chat.startDateString,
                 onClick = {}
@@ -142,7 +142,7 @@ fun StatisticsSelector(chat: Chat) {
                 modifier = Modifier.padding(horizontal = 8.dp),
                 text = "~"
             )
-            SelectorButton(
+            DatePickerButton(
                 modifier = Modifier.weight(1f),
                 text = chat.endDateString,
                 onClick = {}
