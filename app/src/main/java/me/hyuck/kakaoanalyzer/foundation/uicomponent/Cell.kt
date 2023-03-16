@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -143,9 +144,56 @@ fun StatisticsItemCell(
     }
 }
 
+@Composable
+fun ContentRow(
+    modifier: Modifier = Modifier,
+    title: String,
+    count: Int,
+    contentPaddingValues: PaddingValues,
+) {
+    Column(
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(contentPaddingValues)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = stringResource(id = R.string.comma_number_times, count),
+                color = Color.Gray,                 // TODO: 추후 테마 반영해서 컬러 변경
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+        Divider(
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+        )
+    }
+}
 
 
 
+
+
+@Preview
+@Composable
+private fun ContentRowPreview() {
+    Surface {
+        ContentRow(
+            modifier = Modifier.padding(bottom = 8.dp),
+            title = "안녕하십니까",
+            count = 1234,
+            contentPaddingValues = PaddingValues(all = 8.dp)
+        )
+    }
+}
 
 @Preview
 @Composable
