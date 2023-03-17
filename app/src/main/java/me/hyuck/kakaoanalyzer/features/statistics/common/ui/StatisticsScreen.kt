@@ -15,10 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
+import me.hyuck.kakaoanalyzer.features.statistics.participant.ui.ParticipantScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.DatePickerButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
@@ -110,10 +110,10 @@ fun TabbedViewPagerContent(
             ) {
                 when(tabs[page]) {
                     StatisticsTab.BASIC -> {
-                        StatisticsBasicScreen(
-                            viewModel = hiltViewModel(),
-                            chat = chat
-                        )
+                        StatisticsBasicScreen(chat = chat)
+                    }
+                    StatisticsTab.PARTICIPANT -> {
+                        ParticipantScreen(chat = chat)
                     }
                     else -> {
                         Text(
