@@ -26,9 +26,6 @@ class ChatsEnvironment @Inject constructor(
 
     override fun getChatList(): Flow<List<Chat>> = chatRepository.getChats()
 
-    // TODO: 테스트 후 function 정리
-    override suspend fun getMaxLine(chatId: String): Int = messageRepository.getMaxLine(chatId)
-
     override suspend fun fileScan(localFilesDir: File) {
         val files = localFilesDir.listFiles()
         files?.forEach {

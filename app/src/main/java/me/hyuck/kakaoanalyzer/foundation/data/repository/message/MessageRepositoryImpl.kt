@@ -14,11 +14,6 @@ class MessageRepositoryImpl(
 	private val ioDispatcher: CoroutineDispatcher
 ) : MessageRepository {
 
-	// TODO: 테스트 후 function 정리
-	override suspend fun getMaxLine(chatId: String): Int {
-		return messageDao.getMaxLine(chatId) ?: 0
-	}
-
 	override fun countUserById(chat: Chat): Flow<Int> {
 		return messageDao.countUserById(chat.id, chat.startDate, chat.endDate)
 	}
