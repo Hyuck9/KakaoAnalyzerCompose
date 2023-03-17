@@ -20,4 +20,11 @@
     <string name="comma_number_times">%,d 회</string>
     <string name="comma_number_persons">%,d 명</string>
     <string name="comma_number_cases">%,d 건</string>
+
+    <string name="text_days">%,d일 전</string>
+    <string name="text_yesterday">어제</string>
+    <string name="text_today">오늘</string>
+    <string name="text_hours">%1$d시간 전</string>
+    <string name="text_minutes">%1$d분 전</string>
+    <string name="text_just_now">방금 전</string>
 </resources>

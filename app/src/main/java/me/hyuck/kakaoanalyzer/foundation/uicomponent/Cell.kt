@@ -25,9 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.hyuck9.progressitem.ProgressItem
 import me.hyuck.kakaoanalyzer.R
+import me.hyuck.kakaoanalyzer.foundation.extension.toTimeString
 import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.foundation.theme.ProgressBackground
 import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.model.Participant
 
 private val ChatItemShape = RoundedCornerShape(10.dp)
 
@@ -173,6 +175,73 @@ fun ContentRow(
             )
         }
         Divider(
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+        )
+    }
+}
+
+@Composable
+fun ParticipantItemCell(
+    modifier: Modifier = Modifier,
+    participant: Participant,
+) {
+    Column(
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(
+                text = participant.userName,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = stringResource(id = R.string.comma_number_times, participant.messageCount),
+                color = Color.Gray,                 // TODO: 추후 테마 반영해서 컬러 변경
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp)
+        ) {
+            Text(
+                text = participant.firstDateString,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                text = participant.firstDate.toTimeString(),
+                color = Color.Gray,                 // TODO: 추후 테마 반영해서 컬러 변경
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp)
+        ) {
+            Text(
+                text = participant.lastDateString,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                text = participant.lastDate.toTimeString(),
+                color = Color.Gray,                 // TODO: 추후 테마 반영해서 컬러 변경
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
+        Divider(
+            modifier = Modifier.padding(top = 8.dp),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
         )
     }
