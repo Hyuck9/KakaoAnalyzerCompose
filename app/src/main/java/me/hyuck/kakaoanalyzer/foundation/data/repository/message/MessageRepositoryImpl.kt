@@ -6,6 +6,7 @@ import kotlinx.coroutines.withContext
 import me.hyuck.kakaoanalyzer.foundation.data.local.dao.MessageDao
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Message
+import me.hyuck.kakaoanalyzer.model.Participant
 import me.hyuck.kakaoanalyzer.model.mapper.toMessageEntities
 import me.hyuck.kakaoanalyzer.model.mapper.toMessageEntity
 
@@ -20,6 +21,13 @@ class MessageRepositoryImpl(
 
 	override fun countMessages(chat: Chat): Flow<Int> {
 		return messageDao.countMessages(chat.id, chat.startDate, chat.endDate)
+	}
+
+	override fun getParticipants(
+		chat: Chat,
+		limit: Int
+	): Flow<List<Participant>> {
+		return messageDao.observeParticipants(chat.id, chat.startDate, chat.endDate, limit)
 	}
 
 	override suspend fun saveMessages(messages: List<Message>) = withContext(ioDispatcher) {
