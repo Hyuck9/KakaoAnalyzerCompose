@@ -89,7 +89,7 @@ class ChatsEnvironment @Inject constructor(
                 } else {
                     if ( line.isNotDateTimeMessage() ) {
                         if (line.isNotEmpty()) {   // 개행된 메시지 이므로 이전 메시지 뒤에 붙이기
-                            message?.append(" $line")
+                            message?.append("\n$line")
                         }
                     }
                 }
