@@ -11,10 +11,6 @@ import java.time.LocalDateTime
 @Dao
 interface MessageDao {
 
-	// TODO: 테스트 후 function 정리
-	@Query("SELECT MAX(lineNumber) FROM messages WHERE chatId = :chatId GROUP BY chatId")
-	suspend fun getMaxLine(chatId: String): Int?
-
 	@Query("SELECT COUNT(DISTINCT userName) FROM messages WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate")
 	fun countUserById(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime): Flow<Int>
 
