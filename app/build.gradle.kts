@@ -87,6 +87,7 @@ dependencies {
 
     // Library
     implementation(Dependencies.composeProgressItem)
+    implementation(Dependencies.splittiesResources)
 
     // Logging
     implementation(Dependencies.timber)
