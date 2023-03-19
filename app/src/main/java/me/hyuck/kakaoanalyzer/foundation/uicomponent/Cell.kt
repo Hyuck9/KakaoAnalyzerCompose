@@ -151,7 +151,6 @@ fun ContentRow(
     modifier: Modifier = Modifier,
     title: String,
     count: Int,
-    contentPaddingValues: PaddingValues,
 ) {
     Column(
         modifier = modifier
@@ -162,7 +161,7 @@ fun ContentRow(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(contentPaddingValues)
+                .padding(8.dp)
         ) {
             Text(
                 text = title,
@@ -259,7 +258,6 @@ private fun ContentRowPreview() {
             modifier = Modifier.padding(bottom = 8.dp),
             title = "안녕하십니까",
             count = 1234,
-            contentPaddingValues = PaddingValues(all = 8.dp)
         )
     }
 }
