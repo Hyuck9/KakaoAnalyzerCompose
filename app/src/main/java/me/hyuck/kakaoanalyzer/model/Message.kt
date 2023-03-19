@@ -27,7 +27,7 @@ data class Message(
 				)
 			)
 		} else {
-			return content.split(" ")
+			return content.replace("\n", " ").split(" ")
 				.filter { it.isPassedKeyword().not() }
 				.map {
 					Word(
