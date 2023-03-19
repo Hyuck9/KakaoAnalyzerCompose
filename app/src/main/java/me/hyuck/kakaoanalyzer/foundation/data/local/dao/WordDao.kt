@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.local.entity.WordEntity
+import me.hyuck.kakaoanalyzer.model.Keyword
 import java.time.LocalDateTime
 
 @Dao
@@ -15,5 +16,15 @@ interface WordDao {
 
 	@Query("SELECT COUNT(*) FROM words WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate")
 	fun countKeywordById(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime): Flow<Int>
+
+	@Query("""
+		SELECT word, COUNT(*) AS wordCount 
+		FROM words 
+		WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate
+		GROUP BY word
+		ORDER BY wordCount DESC
+		LIMIT :limit
+		""")
+	fun getKeywords(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime, limit: Int = -1): Flow<List<Keyword>>
 
 }
