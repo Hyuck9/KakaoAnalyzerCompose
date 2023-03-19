@@ -6,7 +6,6 @@ import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.statistics.participant.data.IParticipantEnvironment
 import me.hyuck.kakaoanalyzer.features.statistics.participant.data.ParticipantEnvironment
-import me.hyuck.kakaoanalyzer.foundation.extension.testLog
 import me.hyuck.kakaoanalyzer.model.Chat
 import javax.inject.Inject
 
@@ -25,7 +24,6 @@ class ParticipantViewModel @Inject constructor(
 			environment.getParticipants(state.value.chat)
 				.collect {
 					setState { copy(items = it) }
-					testLog(it.toString())
 				}
 		}
 	}

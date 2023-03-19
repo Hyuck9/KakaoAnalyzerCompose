@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
+import me.hyuck.kakaoanalyzer.features.statistics.keyword.ui.KeywordScreen
 import me.hyuck.kakaoanalyzer.features.statistics.participant.ui.ParticipantScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.DatePickerButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
@@ -115,7 +116,10 @@ fun TabbedViewPagerContent(
                     StatisticsTab.PARTICIPANT -> {
                         ParticipantScreen(chat = chat)
                     }
-                    else -> {
+                    StatisticsTab.KEYWORD -> {
+                        KeywordScreen(chat = chat)
+                    }
+                    StatisticsTab.TIME -> {
                         Text(
                             text = "Statistics[${tabs[page].value}]  - $chatId"
                         )

@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Keyword
-import me.hyuck.kakaoanalyzer.model.Participant
 import javax.inject.Inject
 
 class KeywordEnvironment @Inject constructor(
