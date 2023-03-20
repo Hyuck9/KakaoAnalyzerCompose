@@ -33,6 +33,7 @@ object Versions {
     // Library
     const val progressItem = "0.0.1"
     const val splittiesResources = "3.0.0-rc03"
+    const val mpAndroidChart = "v3.1.0"
 
     // Logging
     const val timber = "5.0.1"

@@ -37,6 +37,7 @@ object Dependencies {
     // Library
     val composeProgressItem by lazy { "com.github.Hyuck9:ComposeProgressItem:${Versions.progressItem}" }
     val splittiesResources by lazy { "com.louiscad.splitties:splitties-resources:${Versions.splittiesResources}" }
+    val mpAndroidChart by lazy { "com.github.PhilJay:MPAndroidChart:${Versions.mpAndroidChart}" }
 
     // Timber Logging
     val timber by lazy { "com.jakewharton.timber:timber:${Versions.timber}" }

@@ -88,6 +88,7 @@ dependencies {
     // Library
     implementation(Dependencies.composeProgressItem)
     implementation(Dependencies.splittiesResources)
+    implementation(Dependencies.mpAndroidChart)
 
     // Logging
     implementation(Dependencies.timber)
