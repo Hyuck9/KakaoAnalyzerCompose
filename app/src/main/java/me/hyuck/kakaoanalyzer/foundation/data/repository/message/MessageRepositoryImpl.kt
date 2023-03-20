@@ -7,6 +7,7 @@ import me.hyuck.kakaoanalyzer.foundation.data.local.dao.MessageDao
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Message
 import me.hyuck.kakaoanalyzer.model.Participant
+import me.hyuck.kakaoanalyzer.model.TimeZone
 import me.hyuck.kakaoanalyzer.model.mapper.toMessageEntities
 import me.hyuck.kakaoanalyzer.model.mapper.toMessageEntity
 
@@ -28,6 +29,10 @@ class MessageRepositoryImpl(
 		limit: Int
 	): Flow<List<Participant>> {
 		return messageDao.observeParticipants(chat.id, chat.startDate, chat.endDate, limit)
+	}
+
+	override fun getMessageCountByTimeZone(chat: Chat): Flow<List<TimeZone>> {
+		return messageDao.observeMessageCountByTimeZone(chat.id, chat.startDate, chat.endDate)
 	}
 
 	override suspend fun saveMessages(messages: List<Message>) = withContext(ioDispatcher) {
