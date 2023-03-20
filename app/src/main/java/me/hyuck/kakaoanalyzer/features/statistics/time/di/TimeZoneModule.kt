@@ -4,16 +4,16 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import me.hyuck.kakaoanalyzer.features.statistics.time.data.ITimeEnvironment
-import me.hyuck.kakaoanalyzer.features.statistics.time.data.TimeEnvironment
+import me.hyuck.kakaoanalyzer.features.statistics.time.data.ITimeZoneEnvironment
+import me.hyuck.kakaoanalyzer.features.statistics.time.data.TimeZoneEnvironment
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class TimeModule {
+abstract class TimeZoneModule {
 
 	@Binds
 	abstract fun provideEnvironment(
-		environment: TimeEnvironment
-	): ITimeEnvironment
+		environment: TimeZoneEnvironment
+	): ITimeZoneEnvironment
 
 }

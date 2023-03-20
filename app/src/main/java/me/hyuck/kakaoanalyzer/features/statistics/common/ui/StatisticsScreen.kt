@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
 import me.hyuck.kakaoanalyzer.features.statistics.keyword.ui.KeywordScreen
 import me.hyuck.kakaoanalyzer.features.statistics.participant.ui.ParticipantScreen
+import me.hyuck.kakaoanalyzer.features.statistics.time.ui.TimeZoneScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.DatePickerButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
@@ -120,9 +121,7 @@ fun TabbedViewPagerContent(
                         KeywordScreen(chat = chat)
                     }
                     StatisticsTab.TIME -> {
-                        Text(
-                            text = "Statistics[${tabs[page].value}]  - $chatId"
-                        )
+                        TimeZoneScreen(chat = chat)
                     }
                 }
             }
