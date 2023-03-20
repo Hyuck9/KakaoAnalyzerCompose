@@ -17,6 +17,8 @@
     <string name="sub_title_user_count">대화자 수</string>
     <string name="sub_title_keyword_count">분석한 키워드 수</string>
 
+    <string name="label_chart_timezone">채팅 시간대 분석</string>
+
     <string name="comma_number_times">%,d 회</string>
     <string name="comma_number_persons">%,d 명</string>
     <string name="comma_number_cases">%,d 건</string>
