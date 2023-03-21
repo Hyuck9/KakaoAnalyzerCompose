@@ -10,7 +10,7 @@ class KeywordEnvironment @Inject constructor(
 	private val wordRepository: WordRepository
 ) : IKeywordEnvironment {
 
-	override fun getKeywords(chat: Chat): Flow<List<Keyword>> = wordRepository.getKeywords(chat)
+	override fun getKeywords(chat: Chat, limit: Int): Flow<List<Keyword>> = wordRepository.getKeywords(chat, limit)
 
 
 }

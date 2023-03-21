@@ -6,6 +6,6 @@ import me.hyuck.kakaoanalyzer.model.Participant
 
 interface IParticipantEnvironment {
 
-	fun getParticipants(chat: Chat): Flow<List<Participant>>
+	fun getParticipants(chat: Chat, limit: Int = -1): Flow<List<Participant>>
 
 }

@@ -35,6 +35,9 @@ private fun ParticipantContent(
 			.fillMaxSize()
 			.padding(all = 16.dp)
 	) {
+		item {
+
+		}
 		items(
 			items = participants,
 			key = { item -> item.userName }

@@ -6,6 +6,6 @@ import me.hyuck.kakaoanalyzer.model.Keyword
 
 interface IKeywordEnvironment {
 
-	fun getKeywords(chat: Chat): Flow<List<Keyword>>
+	fun getKeywords(chat: Chat, limit: Int = -1): Flow<List<Keyword>>
 
 }

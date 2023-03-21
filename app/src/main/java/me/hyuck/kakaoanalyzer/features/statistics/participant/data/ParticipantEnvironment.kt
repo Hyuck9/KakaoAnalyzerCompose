@@ -10,7 +10,7 @@ class ParticipantEnvironment @Inject constructor(
 	private val messageRepository: MessageRepository
 ) : IParticipantEnvironment {
 
-	override fun getParticipants(chat: Chat): Flow<List<Participant>> = messageRepository.getParticipants(chat)
+	override fun getParticipants(chat: Chat, limit: Int): Flow<List<Participant>> = messageRepository.getParticipants(chat, limit)
 
 
 }

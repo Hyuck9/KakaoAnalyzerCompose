@@ -21,7 +21,7 @@ class KeywordViewModel @Inject constructor(
 
 	private fun initKeywords() {
 		viewModelScope.launch {
-			environment.getKeywords(state.value.chat)
+			environment.getKeywords(state.value.chat, 10)
 				.collect {
 					setState { copy(items = it) }
 				}

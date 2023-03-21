@@ -21,7 +21,7 @@ class ParticipantViewModel @Inject constructor(
 
 	private fun initParticipants() {
 		viewModelScope.launch {
-			environment.getParticipants(state.value.chat)
+			environment.getParticipants(state.value.chat, 10)
 				.collect {
 					setState { copy(items = it) }
 				}
