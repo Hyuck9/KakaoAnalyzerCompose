@@ -2,10 +2,13 @@ package me.hyuck.kakaoanalyzer.features.statistics.time.ui
 
 import android.graphics.Color
 import android.graphics.DashPathEffect
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -16,12 +19,6 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.jaikeerthick.composable_graphs.color.*
-import com.jaikeerthick.composable_graphs.composables.LineGraph
-import com.jaikeerthick.composable_graphs.data.GraphData
-import com.jaikeerthick.composable_graphs.style.LabelPosition
-import com.jaikeerthick.composable_graphs.style.LineGraphStyle
-import com.jaikeerthick.composable_graphs.style.LinearGraphVisibility
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.TimeZone
