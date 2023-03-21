@@ -1,7 +1,5 @@
 package me.hyuck.kakaoanalyzer.features.statistics.time.ui
 
-import android.graphics.Color
-import android.graphics.DashPathEffect
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -16,14 +14,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.TimeZone
-import splitties.resources.appStr
-import kotlin.streams.toList
+import me.hyuck.kakaoanalyzer.model.getLineData
 
 @Composable
 fun TimeZoneScreen(
@@ -56,7 +49,7 @@ private fun TimeZoneContent(
     }
 
     LaunchedEffect(times) {
-        lineChart.data = getLineData(times)
+        lineChart.data = times.getLineData()
         lineChart.data.notifyDataChanged()
         lineChart.invalidate()
         lineChart.notifyDataSetChanged()
@@ -70,36 +63,4 @@ private fun TimeZoneContent(
             lineChart
         }
     )
-}
-
-private fun getLineData(times: List<TimeZone>): LineData {
-    val entries = times.stream()
-        .map {
-            Entry(it.hour.toFloat(), it.messageCount.toFloat())
-        }.toList()
-
-    val dataSet = LineDataSet(entries, appStr(R.string.label_chart_timezone)).apply {
-        setDrawIcons(false)
-        enableDashedLine(10f, 5f, 0f)
-
-        color = Color.BLACK
-        setCircleColor(Color.BLACK)
-
-        lineWidth = 1f
-        circleRadius = 3f
-
-        setDrawCircleHole(false)
-
-        formLineWidth = 1f
-        formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-        formSize = 15f
-
-        valueTextSize = 9f
-
-        enableDashedHighlightLine(10f, 5f, 0f)
-
-        setDrawFilled(true)
-    }
-
-    return LineData(dataSet)
 }
