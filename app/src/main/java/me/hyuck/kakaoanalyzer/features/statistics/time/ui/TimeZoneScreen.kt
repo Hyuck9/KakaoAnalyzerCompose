@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberLineChart
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.TimeZone
 import me.hyuck.kakaoanalyzer.model.getLineData
@@ -34,19 +35,7 @@ private fun TimeZoneContent(
     modifier: Modifier = Modifier,
     times: List<TimeZone>
 ) {
-    val context = LocalContext.current
-    val lineChart = remember {
-        LineChart(context).apply {
-            description.isEnabled = false
-            setTouchEnabled(true)
-            setDrawGridBackground(false)
-            isDragEnabled = true
-            setScaleEnabled(true)
-            setPinchZoom(true)
-            animateX(1500)
-            legend.form = Legend.LegendForm.LINE
-        }
-    }
+    val lineChart = rememberLineChart()
 
     LaunchedEffect(times) {
         lineChart.data = times.getLineData()
