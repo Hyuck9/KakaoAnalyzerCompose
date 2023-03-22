@@ -18,6 +18,8 @@
     <string name="sub_title_keyword_count">분석한 키워드 수</string>
 
     <string name="label_chart_timezone">채팅 시간대 분석</string>
+    <string name="label_chart_participant">사용자별 채팅 비율</string>
+    <string name="label_chart_keyword">키워드 사용 빈도수</string>
 
     <string name="comma_number_times">%,d 회</string>
     <string name="comma_number_persons">%,d 명</string>
