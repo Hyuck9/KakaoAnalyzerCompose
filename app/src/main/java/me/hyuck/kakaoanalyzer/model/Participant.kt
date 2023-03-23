@@ -13,7 +13,3 @@ data class Participant(
 	val firstDateString: String get() = firstDate.toFormatString("첫번째 메시지 : yyyy-MM-dd HH:mm")
 	val lastDateString: String get() = lastDate.toFormatString("마지막 메시지 : yyyy-MM-dd HH:mm")
 }
-
-fun List<Participant>.toPieEntries(): List<PieEntry> {
-	return this.map { PieEntry(it.messageCount.toFloat(), it.userName) }
-}
