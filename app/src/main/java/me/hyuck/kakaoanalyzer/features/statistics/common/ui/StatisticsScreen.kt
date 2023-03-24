@@ -6,9 +6,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +23,7 @@ import me.hyuck.kakaoanalyzer.features.statistics.time.ui.TimeZoneScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.DatePickerButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsDatePicker
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.StatisticsTab
 import java.time.LocalDateTime
@@ -34,6 +34,9 @@ fun StatisticsScreen(
     upPress: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var isShowingStartDatePicker by rememberSaveable { mutableStateOf(false) }
+    var isShowingEndDatePicker by rememberSaveable { mutableStateOf(false) }
+
     StatisticScaffold(
         topBar = {
             Surface {
@@ -48,8 +51,21 @@ fun StatisticsScreen(
             modifier = Modifier.padding(it),
             chat = state.chat,
             tabs = state.statisticsTabs,
-            onStartDateClick = { viewModel.testSTart() },
-            onEndDateClick = { viewModel.testEnd() }
+            onStartDateClick = { isShowingStartDatePicker = true },
+            onEndDateClick = { isShowingEndDatePicker = true }
+        )
+
+        StatisticsDatePicker(
+            date = state.chat.startDate,
+            visible = isShowingStartDatePicker,
+            onConfirm = {},
+            onDismiss = { isShowingStartDatePicker = false }
+        )
+        StatisticsDatePicker(
+            date = state.chat.endDate,
+            visible = isShowingEndDatePicker,
+            onConfirm = {},
+            onDismiss = { isShowingEndDatePicker = false }
         )
     }
 }
