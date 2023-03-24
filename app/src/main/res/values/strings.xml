@@ -31,4 +31,7 @@
     <string name="text_hours">%1$d시간 전</string>
     <string name="text_minutes">%1$d분 전</string>
     <string name="text_just_now">방금 전</string>
+
+    <string name="button_confirm_label">확인</string>
+    <string name="button_cancel_label">취소</string>
 </resources>
