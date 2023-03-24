@@ -7,23 +7,27 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 fun LocalDateTime.toMillis(): Long {
-	val zoneId = ZoneId.systemDefault()
-	return atZone(zoneId).toInstant().toEpochMilli()
+	return this.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+}
+fun Long.toLocalDateTime(): LocalDateTime {
+	return LocalDateTime.ofInstant(Instant.ofEpochMilli(this), ZoneId.systemDefault())
 }
 
-fun Long.toLocalDateTime(): LocalDateTime {
-	val zoneId = ZoneId.systemDefault()
-	return LocalDateTime.ofInstant(Instant.ofEpochMilli(this), zoneId)
+fun LocalDateTime.toDate(): Date {
+	return Date.from(this.atZone(ZoneId.systemDefault()).toInstant())
+}
+fun Date.toLocalDateTime(): LocalDateTime {
+	return LocalDateTime.ofInstant(this.toInstant(), ZoneId.systemDefault())
 }
 
 fun String.toLocalDateTime(): LocalDateTime {
 	return LocalDateTime.parse(this, DateTimeFormatter.ofPattern("yyyy년 M월 d일 a h:mm"))
 }
-
 fun LocalDateTime.toFormatString(format: String): String {
-	return format(DateTimeFormatter.ofPattern(format))
+	return this.format(DateTimeFormatter.ofPattern(format))
 }
 
 fun LocalDateTime.toTimeString(): String {
