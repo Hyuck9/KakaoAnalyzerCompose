@@ -31,7 +31,6 @@ import java.time.LocalDateTime
 @Composable
 fun StatisticsScreen(
     viewModel: StatisticsViewModel,
-    chatId: String,
     upPress: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -49,7 +48,6 @@ fun StatisticsScreen(
             modifier = Modifier.padding(it),
             chat = state.chat,
             tabs = state.statisticsTabs,
-            chatId = chatId,
             onStartDateClick = { viewModel.testSTart() },
             onEndDateClick = { viewModel.testEnd() }
         )
@@ -62,7 +60,6 @@ fun TabbedViewPagerContent(
     modifier: Modifier = Modifier,
     chat: Chat,
     tabs: List<StatisticsTab>,
-    chatId: String,
     onStartDateClick: () -> Unit,
     onEndDateClick: () -> Unit,
 ) {
@@ -198,7 +195,6 @@ private fun ViewPagerWithTabPreview() {
             endDate = LocalDateTime.now(),
         ),
         tabs = StatisticsTab.values().asList(),
-        chatId = "TEST",
         onStartDateClick = {},
         onEndDateClick = {}
     )

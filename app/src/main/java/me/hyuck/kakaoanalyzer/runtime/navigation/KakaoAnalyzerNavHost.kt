@@ -28,9 +28,9 @@ fun NavGraphBuilder.kakaoAnalyzerNavHost(
     ) { navBackStackEntry ->
         val arguments = requireNotNull(navBackStackEntry.arguments)
         arguments.getString(MainDestinations.CHAT_ID_KEY)
-        ?.let { chatId ->
+        ?.let {
             val viewModel = hiltViewModel<StatisticsViewModel>()
-            StatisticsScreen(viewModel, chatId, upPress)
+            StatisticsScreen(viewModel, upPress)
         }
     }
 }
