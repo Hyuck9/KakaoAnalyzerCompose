@@ -83,7 +83,7 @@ class ChatsEnvironment @Inject constructor(
             if (index >= 5 ) {
                 if (line.isFirstDateTimeMessage()) {
                     message?.let {
-                        parseMessage(chat.id, it.toString().trim(), index + 1)
+                        parseMessage(chat.id, it.toString(), index + 1)
                     } ?: testLog("message is null")
                     message = StringBuilder(line)
                 } else {
@@ -97,8 +97,8 @@ class ChatsEnvironment @Inject constructor(
         }
 
         message?.let {
-            testLog("파싱 완료 후 완성된 메시지 : ${it.toString().trim()}")
-            parseMessage(chat.id, it.toString().trim(), readLines.size)
+            testLog("파싱 완료 후 완성된 메시지 : $it")
+            parseMessage(chat.id, it.toString(), readLines.size)
         } ?: testLog("파싱 완료 후 message is null")
     }
 
