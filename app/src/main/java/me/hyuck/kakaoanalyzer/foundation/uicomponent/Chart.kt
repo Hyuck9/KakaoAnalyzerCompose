@@ -36,6 +36,16 @@ fun rememberPieChart(): PieChart {
             isRotationEnabled = true
             isHighlightPerTapEnabled = true
             animateY(1400, Easing.EaseInOutQuad)
+
+            with(legend) {
+                isWordWrapEnabled = true
+                xEntrySpace = 7f
+                yEntrySpace = 0f
+                yOffset = 5f
+            }
+
+            setEntryLabelColor(Color.WHITE)
+            setEntryLabelTextSize(12f)
         }
     }
     return pieChart
