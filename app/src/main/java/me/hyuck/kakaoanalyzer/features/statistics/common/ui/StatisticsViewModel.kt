@@ -13,7 +13,7 @@ import javax.inject.Inject
 class StatisticsViewModel @Inject constructor(
 	savedStateHandle: SavedStateHandle,
 	statisticsEnvironment: IStatisticsEnvironment
-) : StatefulViewModel<StatisticsState, Unit, Unit, IStatisticsEnvironment>(StatisticsState(), statisticsEnvironment) {
+) : StatefulViewModel<StatisticsState, Unit, StatisticsAction, IStatisticsEnvironment>(StatisticsState(), statisticsEnvironment) {
 
 	private val chatId = savedStateHandle.get<String>(MainDestinations.CHAT_ID_KEY)
 
@@ -32,24 +32,23 @@ class StatisticsViewModel @Inject constructor(
 		}
 	}
 
-	fun testSTart() {
-		setState { copy(
-			chat = chat.copy(
-				startDate = chat.startDate.plusDays(1)
-			)
-		) }
-	}
-
-	fun testEnd() {
-		setState { copy(
-			chat = chat.copy(
-				endDate = chat.endDate.minusDays(1)
-			)
-		) }
-	}
-
-	override fun dispatch(action: Unit) {
-
+	override fun dispatch(action: StatisticsAction) {
+		when (action) {
+			is StatisticsAction.ChangeStartDate -> {
+				setState {
+					copy(
+						chat = chat.copy(startDate = action.startDate)
+					)
+				}
+			}
+			is StatisticsAction.ChangeEndDate -> {
+				setState {
+					copy(
+						chat = chat.copy(endDate = action.endDate)
+					)
+				}
+			}
+		}
 	}
 
 }

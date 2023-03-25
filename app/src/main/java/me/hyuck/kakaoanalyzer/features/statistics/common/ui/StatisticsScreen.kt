@@ -58,13 +58,17 @@ fun StatisticsScreen(
         StatisticsDatePicker(
             date = state.chat.startDate,
             visible = isShowingStartDatePicker,
-            onConfirm = {},
+            onConfirm = { startDate ->
+                viewModel.dispatch(StatisticsAction.ChangeStartDate(startDate))
+            },
             onDismiss = { isShowingStartDatePicker = false }
         )
         StatisticsDatePicker(
             date = state.chat.endDate,
             visible = isShowingEndDatePicker,
-            onConfirm = {},
+            onConfirm = { endDate ->
+                viewModel.dispatch(StatisticsAction.ChangeEndDate(endDate))
+            },
             onDismiss = { isShowingEndDatePicker = false }
         )
     }
