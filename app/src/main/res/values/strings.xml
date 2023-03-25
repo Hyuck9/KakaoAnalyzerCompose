@@ -34,4 +34,5 @@
 
     <string name="button_confirm_label">확인</string>
     <string name="button_cancel_label">취소</string>
+    <string name="button_more">더보기</string>
 </resources>

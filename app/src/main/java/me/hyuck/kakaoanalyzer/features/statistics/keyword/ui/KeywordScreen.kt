@@ -18,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.formatter.PercentFormatter
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ContentRow
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.MoreButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Keyword
@@ -44,16 +45,24 @@ fun KeywordContent(
 	LazyColumn(
 		modifier = modifier
 			.fillMaxSize()
-			.padding(all = 16.dp)
+			.padding(horizontal = 16.dp)
 	) {
 		item {
-			PieChart(keywords = keywords)
+			PieChart(
+				modifier = Modifier.padding(top = 16.dp),
+				keywords = keywords
+			)
 		}
 		items(
 			items = keywords,
 			key = { item -> item.word }
 		) { keyword ->
 			ContentRow(title = keyword.word, count = keyword.wordCount)
+		}
+		if (keywords.size == 10) {
+			item {
+				MoreButton()
+			}
 		}
 	}
 

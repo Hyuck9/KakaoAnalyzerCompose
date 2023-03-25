@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.formatter.PercentFormatter
 import me.hyuck.kakaoanalyzer.R
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.MoreButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ParticipantItemCell
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
@@ -44,16 +45,24 @@ private fun ParticipantContent(
 	LazyColumn(
 		modifier = modifier
 			.fillMaxSize()
-			.padding(all = 16.dp)
+			.padding(horizontal = 16.dp)
 	) {
 		item {
-			PieChart(participants = participants)
+			PieChart(
+				modifier = Modifier.padding(top = 16.dp),
+				participants = participants
+			)
 		}
 		items(
 			items = participants,
 			key = { item -> item.userName }
 		) { participant ->
 			ParticipantItemCell(participant = participant)
+		}
+		if (participants.size == 10) {
+			item {
+				MoreButton()
+			}
 		}
 	}
 }

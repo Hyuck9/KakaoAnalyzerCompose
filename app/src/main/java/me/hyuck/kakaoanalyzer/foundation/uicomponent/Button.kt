@@ -16,11 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import me.hyuck.kakaoanalyzer.R
 
 @Composable
 fun KakaoAnalyzerIconButton(
@@ -94,6 +96,21 @@ fun DatePickerButton(
     }
 }
 
+@Composable
+fun MoreButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
+) {
+    Button(
+        modifier = modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
+        onClick = onClick
+    ) {
+        Text(text = stringResource(R.string.button_more))
+    }
+}
+
 
 
 @Preview
@@ -104,5 +121,13 @@ private fun SelectorButtonPreview() {
             text = "2023-03-11",
             onClick = {}
         )
+    }
+}
+
+@Preview
+@Composable
+private fun MoreButtonPreview() {
+    Surface {
+        MoreButton()
     }
 }
