@@ -87,4 +87,6 @@ val KakaoBubbleBrown = Color(0xff3C1E1E)
 val ProgressBackground = Color(0xfff9f2ff)
 val ProgressForeground = Color(0xffa557f5)
 
+val OneOnOneCaption = Color(0x7E3F51B5)
+
 const val AlphaNearOpaque = 0.95f

@@ -24,6 +24,7 @@
     <string name="comma_number_times">%,d 회</string>
     <string name="comma_number_persons">%,d 명</string>
     <string name="comma_number_cases">%,d 건</string>
+    <string name="comma_number_parent_times">(%,d 회)</string>
 
     <string name="text_days">%,d일 전</string>
     <string name="text_yesterday">어제</string>
@@ -35,4 +36,9 @@
     <string name="button_confirm_label">확인</string>
     <string name="button_cancel_label">취소</string>
     <string name="button_more">더보기</string>
+
+    <string name="all_first_reply_time">대화방 전체 평균 \n선톡 답장시간</string>
+    <string name="all_reply_time">대화방 전체 평균\n답장시간</string>
+    <string name="one_on_one_title">1:1 대화 분석</string>
+    <string name="one_on_one_explain">※ 1시간 이내에 답장이 없었으면 대화 종료로 간주합니다. 위 결과는 단순 계산 수치임을 참고해 주세요.</string>
 </resources>
