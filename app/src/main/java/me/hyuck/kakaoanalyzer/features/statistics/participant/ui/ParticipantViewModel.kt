@@ -2,10 +2,12 @@ package me.hyuck.kakaoanalyzer.features.statistics.participant.ui
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.statistics.participant.data.IParticipantEnvironment
 import me.hyuck.kakaoanalyzer.features.statistics.participant.data.ParticipantEnvironment
+import me.hyuck.kakaoanalyzer.foundation.extension.testLog
 import me.hyuck.kakaoanalyzer.model.Chat
 import javax.inject.Inject
 
@@ -24,6 +26,18 @@ class ParticipantViewModel @Inject constructor(
 			environment.getParticipants(state.value.chat, 10)
 				.collect {
 					setState { copy(items = it) }
+					if (state.value.isOneOnOne) {
+						initOneOnOne()
+					}
+				}
+		}
+	}
+
+	private fun initOneOnOne() {
+		viewModelScope.launch {
+			environment.getMessages(state.value.chat)
+				.collect {
+					setState { copy(messages = it) }
 				}
 		}
 	}

@@ -35,13 +35,14 @@ fun ParticipantScreen(
 	viewModel.initChat(chat)
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
-	ParticipantContent(participants = state.items)
+	ParticipantContent(participants = state.items, isOneOnOne = state.isOneOnOne)
 }
 
 @Composable
 private fun ParticipantContent(
 	modifier: Modifier = Modifier,
 	participants: List<Participant>,
+	isOneOnOne: Boolean = false
 ) {
 	var isShowingDialog by rememberSaveable { mutableStateOf(false) }
 	LazyColumn(
@@ -65,7 +66,7 @@ private fun ParticipantContent(
 			item {
 				SimpleTextButton(text = stringResource(R.string.button_more))
 			}
-		} else if (participants.size == 2) {
+		} else if (isOneOnOne) {
 			item {
 				SimpleTextButton(
 					text = stringResource(R.string.button_one_on_one),

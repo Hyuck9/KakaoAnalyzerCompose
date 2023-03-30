@@ -35,6 +35,9 @@ interface MessageDao {
 	)
 	fun observeParticipants(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime, limit: Int = -1): Flow<List<Participant>>
 
+	@Query("SELECT * FROM messages WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate ORDER BY dateTime LIMIT :limit")
+	fun observeMessages(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime, limit: Int = -1): Flow<List<MessageEntity>>
+
 	@Query("""
 		SELECT hour, COUNT(*) AS messageCount 
 		FROM messages 

@@ -14,6 +14,8 @@ interface MessageRepository {
 
 	fun getParticipants(chat: Chat, limit: Int = -1): Flow<List<Participant>>
 
+	fun getMessages(chat: Chat, limit: Int = -1): Flow<List<Message>>
+
 	fun getMessageCountByTimeZone(chat: Chat): Flow<List<TimeZone>>
 
 	suspend fun saveMessages(messages: List<Message>)
