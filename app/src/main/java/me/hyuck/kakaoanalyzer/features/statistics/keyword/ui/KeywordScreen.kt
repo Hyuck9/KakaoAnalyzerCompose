@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,7 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.formatter.PercentFormatter
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ContentRow
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.MoreButton
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.SimpleTextButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Keyword
@@ -61,7 +62,7 @@ fun KeywordContent(
 		}
 		if (keywords.size == 10) {
 			item {
-				MoreButton()
+				SimpleTextButton(text = stringResource(R.string.button_more))
 			}
 		}
 	}

@@ -36,6 +36,7 @@
     <string name="button_confirm_label">확인</string>
     <string name="button_cancel_label">취소</string>
     <string name="button_more">더보기</string>
+    <string name="button_one_on_one">1:1 분석</string>
 
     <string name="all_first_reply_time">대화방 전체 평균 \n선톡 답장시간</string>
     <string name="all_reply_time">대화방 전체 평균\n답장시간</string>

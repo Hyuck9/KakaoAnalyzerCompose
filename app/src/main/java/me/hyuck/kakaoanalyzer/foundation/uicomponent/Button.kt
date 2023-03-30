@@ -97,17 +97,18 @@ fun DatePickerButton(
 }
 
 @Composable
-fun MoreButton(
+fun SimpleTextButton(
     modifier: Modifier = Modifier,
+    text: String,
     onClick: () -> Unit = {}
 ) {
     Button(
         modifier = modifier
             .padding(8.dp)
             .fillMaxWidth(),
-        onClick = onClick
+        onClick = onClick,
     ) {
-        Text(text = stringResource(R.string.button_more))
+        Text(text = text)
     }
 }
 
@@ -128,6 +129,6 @@ private fun SelectorButtonPreview() {
 @Composable
 private fun MoreButtonPreview() {
     Surface {
-        MoreButton()
+        SimpleTextButton(text = stringResource(R.string.button_more))
     }
 }

@@ -7,18 +7,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.formatter.PercentFormatter
 import me.hyuck.kakaoanalyzer.R
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.MoreButton
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.OneOnOneDialog
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ParticipantItemCell
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.SimpleTextButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
 import me.hyuck.kakaoanalyzer.model.Participant
@@ -42,6 +43,7 @@ private fun ParticipantContent(
 	modifier: Modifier = Modifier,
 	participants: List<Participant>,
 ) {
+	var isShowingDialog by rememberSaveable { mutableStateOf(false) }
 	LazyColumn(
 		modifier = modifier
 			.fillMaxSize()
@@ -61,9 +63,22 @@ private fun ParticipantContent(
 		}
 		if (participants.size == 10) {
 			item {
-				MoreButton()
+				SimpleTextButton(text = stringResource(R.string.button_more))
+			}
+		} else if (participants.size == 2) {
+			item {
+				SimpleTextButton(
+					text = stringResource(R.string.button_one_on_one),
+					onClick = { isShowingDialog = true }
+				)
 			}
 		}
+	}
+
+	if (isShowingDialog) {
+		OneOnOneDialog(
+			setShowDialog = { isShowingDialog = false }
+		)
 	}
 }
 

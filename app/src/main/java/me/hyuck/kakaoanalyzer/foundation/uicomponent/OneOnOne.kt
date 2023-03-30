@@ -1,6 +1,7 @@
 package me.hyuck.kakaoanalyzer.foundation.uicomponent
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Share
@@ -16,9 +17,45 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.theme.Lavender10
+import me.hyuck.kakaoanalyzer.foundation.theme.MediumRadius
 import me.hyuck.kakaoanalyzer.foundation.theme.OneOnOneCaption
+
+@Composable
+fun OneOnOneDialog(
+    setShowDialog: (Boolean) -> Unit = {}
+) {
+    Dialog(onDismissRequest = { setShowDialog(false) }) {
+        Surface(
+            shape = RoundedCornerShape(MediumRadius),
+            color = Color.White
+        ) {
+            Column {
+                OneOnOneTitle()
+                ParticipantRowItem("상대방", 1234, "회원님", 789)
+                ThreeColumnsRowItem("3회 (73.81%)", "선톡 횟수", "1,321회 (26.19%)")
+                ThreeColumnsRowItem("21분 25초", "평균 선톡 답장시간", "9분 30초")
+                ThreeColumnsRowItem("7분 10초", "평균 답장시간", "5분 18초")
+                ResponseRowItem("6분 55초", "12분 31초")
+                Text(
+                    modifier = Modifier.padding(horizontal = 32.dp),
+                    text = stringResource(id = R.string.one_on_one_explain),
+                    fontSize = 12.sp,
+                    color = OneOnOneCaption
+                )
+                Spacer(modifier = Modifier.requiredHeight(16.dp))
+                SimpleTextButton(
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    text = stringResource(R.string.button_confirm_label),
+                    onClick = { setShowDialog(false) }
+                )
+                Spacer(modifier = Modifier.requiredHeight(16.dp))
+            }
+        }
+    }
+}
 
 @Composable
 fun OneOnOneTitle(
@@ -227,9 +264,10 @@ private fun ResponseRowItemPreview() {
     }
 }
 
+
 @Preview
 @Composable
-private fun OneOnOneDialogPreview() {
+private fun OneOnOnePreview() {
     Surface {
         Column {
             OneOnOneTitle()
@@ -245,5 +283,15 @@ private fun OneOnOneDialogPreview() {
                 color = OneOnOneCaption
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun OneOnOneDialogPreview() {
+    androidx.compose.material.Surface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        OneOnOneDialog()
     }
 }
