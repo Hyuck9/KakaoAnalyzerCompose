@@ -52,3 +52,7 @@ fun LocalDateTime.durationHoursTo(previousDateTime: LocalDateTime): Long {
 fun LocalDateTime.durationSecondsTo(previousDateTime: LocalDateTime): Long {
 	return ChronoUnit.SECONDS.between(previousDateTime, this)
 }
+
+fun Double.toStringMinutesSeconds(): String {
+	return "${(this / 60).toLong()}분 ${(this % 60).toLong()}초"
+}
