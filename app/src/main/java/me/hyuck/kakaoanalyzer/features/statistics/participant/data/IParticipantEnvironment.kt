@@ -11,4 +11,6 @@ interface IParticipantEnvironment {
 
 	fun getMessages(chat: Chat, limit: Int = -1): Flow<List<Message>>
 
+	fun analysisMessages(messages: List<Message>)
+
 }

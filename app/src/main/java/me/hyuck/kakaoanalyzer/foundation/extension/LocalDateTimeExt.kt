@@ -2,6 +2,7 @@ package me.hyuck.kakaoanalyzer.foundation.extension
 
 import me.hyuck.kakaoanalyzer.R
 import splitties.resources.appStr
+import java.time.Duration
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -42,4 +43,12 @@ fun LocalDateTime.toTimeString(): String {
 		diffMin > 0 -> appStr(R.string.text_minutes, diffMin)
 		else -> appStr(R.string.text_just_now)
 	}
+}
+
+fun LocalDateTime.durationHoursTo(previousDateTime: LocalDateTime): Long {
+	return ChronoUnit.HOURS.between(previousDateTime, this)
+}
+
+fun LocalDateTime.durationSecondsTo(previousDateTime: LocalDateTime): Long {
+	return ChronoUnit.SECONDS.between(previousDateTime, this)
 }
