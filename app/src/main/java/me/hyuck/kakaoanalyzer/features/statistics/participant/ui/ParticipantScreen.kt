@@ -22,6 +22,7 @@ import me.hyuck.kakaoanalyzer.foundation.uicomponent.ParticipantItemCell
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.SimpleTextButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.model.OneOnOneAnalyticsInfo
 import me.hyuck.kakaoanalyzer.model.Participant
 import me.hyuck.kakaoanalyzer.model.mapper.toPieData
 import me.hyuck.kakaoanalyzer.model.mapper.toPieEntries
@@ -35,13 +36,18 @@ fun ParticipantScreen(
 	viewModel.initChat(chat)
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
-	ParticipantContent(participants = state.items, isOneOnOne = state.isOneOnOne)
+	ParticipantContent(
+		participants = state.items,
+		isOneOnOne = state.isOneOnOne,
+		oneOnOneAnalyticsInfo = state.oneOnOneAnalyticsInfo
+	)
 }
 
 @Composable
 private fun ParticipantContent(
 	modifier: Modifier = Modifier,
 	participants: List<Participant>,
+	oneOnOneAnalyticsInfo: OneOnOneAnalyticsInfo,
 	isOneOnOne: Boolean = false
 ) {
 	var isShowingDialog by rememberSaveable { mutableStateOf(false) }
@@ -78,6 +84,18 @@ private fun ParticipantContent(
 
 	if (isShowingDialog) {
 		OneOnOneDialog(
+			user1Name = oneOnOneAnalyticsInfo.user1Name,
+			user1MessageCount = oneOnOneAnalyticsInfo.user1MessageCount,
+			user2Name = oneOnOneAnalyticsInfo.user2Name,
+			user2MessageCount = oneOnOneAnalyticsInfo.user2MessageCount,
+			user1FirstMessageCount = oneOnOneAnalyticsInfo.user1FirstMessageCount,
+			user2FirstMessageCount = oneOnOneAnalyticsInfo.user2FirstMessageCount,
+			user1FirstReplyTime = oneOnOneAnalyticsInfo.user1FirstReplyTime,
+			user2FirstReplyTime = oneOnOneAnalyticsInfo.user2FirstReplyTime,
+			user1AverageReplyTime = oneOnOneAnalyticsInfo.user1AverageReplyTime,
+			user2AverageReplyTime = oneOnOneAnalyticsInfo.user2AverageReplyTime,
+			allFirstReplyTime = oneOnOneAnalyticsInfo.allFirstReplyTime,
+			allAverageReplyTime = oneOnOneAnalyticsInfo.allAverageReplyTime,
 			setShowDialog = { isShowingDialog = false }
 		)
 	}

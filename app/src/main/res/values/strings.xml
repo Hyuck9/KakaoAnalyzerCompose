@@ -11,6 +11,8 @@
     <string name="title_statistics">분석결과</string>
 
     <string name="title_analysis_overview">분석 개요</string>
+    <string name="title_detail_participant">사용자별 채팅횟수 분석</string>
+    <string name="title_detail_keyword">키워드 사용횟수 분석</string>
 
     <string name="sub_title_period">분석 기간</string>
     <string name="sub_title_message_count">총 채팅 횟수</string>
@@ -25,6 +27,7 @@
     <string name="comma_number_persons">%,d 명</string>
     <string name="comma_number_cases">%,d 건</string>
     <string name="comma_number_parent_times">(%,d 회)</string>
+    <string name="comma_number_first_reply_count">%1$,d회 (%2$.2f%%)</string>
 
     <string name="text_days">%,d일 전</string>
     <string name="text_yesterday">어제</string>
@@ -41,5 +44,8 @@
     <string name="all_first_reply_time">대화방 전체 평균 \n선톡 답장시간</string>
     <string name="all_reply_time">대화방 전체 평균\n답장시간</string>
     <string name="one_on_one_title">1:1 대화 분석</string>
+    <string name="one_on_one_first_reply_count">선톡 횟수</string>
+    <string name="one_on_one_first_reply_time">평균 선톡 답장시간</string>
+    <string name="one_on_one_average_reply_time">평균 답장시간</string>
     <string name="one_on_one_explain">※ 1시간 이내에 답장이 없었으면 대화 종료로 간주합니다. 위 결과는 단순 계산 수치임을 참고해 주세요.</string>
 </resources>

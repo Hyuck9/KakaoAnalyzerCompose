@@ -41,8 +41,8 @@ data class OneOnOneAnalyticsInfo(
 
     val user1Name: String get() = users[0]
     val user2Name: String get() = users[1]
-    val user1MessageCount: Int get() = firstMessages.filter { it.userName == users[0] }.size
-    val user2MessageCount: Int get() = firstMessages.filter { it.userName == users[1] }.size
+    val user1MessageCount: Int get() = allMessages.filter { it.userName == users[0] }.size
+    val user2MessageCount: Int get() = allMessages.filter { it.userName == users[1] }.size
     val user1FirstMessageCount: String get() = firstMessages.toStringMessageCount { it.userName == users[0] }
     val user2FirstMessageCount: String get() = firstMessages.toStringMessageCount { it.userName == users[1] }
     val user1FirstReplyTime: String get() = firstReplies.toStringAverageTimes { it.userName == users[0] }
