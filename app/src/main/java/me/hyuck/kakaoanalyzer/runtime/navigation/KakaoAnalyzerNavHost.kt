@@ -3,35 +3,59 @@ package me.hyuck.kakaoanalyzer.runtime.navigation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.composable
+import me.hyuck.kakaoanalyzer.features.detail.ui.DetailScreen
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsScreen
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsViewModel
 import me.hyuck.kakaoanalyzer.features.home.guide.ui.GuideScreen
 import me.hyuck.kakaoanalyzer.features.home.settings.ui.SettingsScreen
 import me.hyuck.kakaoanalyzer.features.statistics.common.ui.StatisticsScreen
-import me.hyuck.kakaoanalyzer.features.statistics.common.ui.StatisticsViewModel
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
-import me.hyuck.kakaoanalyzer.runtime.MainDestinations
+import me.hyuck.kakaoanalyzer.model.DetailType
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.CHAT_ID_KEY
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.HOME_ROUTE
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.KEYWORDS_DETAIL_ROUTE
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.PARTICIPANTS_DETAIL_ROUTE
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.STATISTICS_ROUTE
 
 fun NavGraphBuilder.kakaoAnalyzerNavHost(
     onChatSelected: (String, NavBackStackEntry) -> Unit,
+    onDetailParticipants: (String, NavBackStackEntry) -> Unit,
+    onDetailKeywords: (String, NavBackStackEntry) -> Unit,
     upPress: () -> Unit
 ) {
     navigation(
-        route = MainDestinations.HOME_ROUTE,
+        route = HOME_ROUTE,
         startDestination = HomeSections.CHATS.route
     ) {
         addHomeGraph(onChatSelected)
     }
     composable(
-        route = "${MainDestinations.CHAT_DETAIL_ROUTE}/{${MainDestinations.CHAT_ID_KEY}}",
-        arguments = listOf(navArgument(MainDestinations.CHAT_ID_KEY) { type = NavType.StringType })
+        route = "${STATISTICS_ROUTE}/{${CHAT_ID_KEY}}",
+        arguments = listOf(navArgument(CHAT_ID_KEY) { type = NavType.StringType })
     ) { navBackStackEntry ->
-        val arguments = requireNotNull(navBackStackEntry.arguments)
-        arguments.getString(MainDestinations.CHAT_ID_KEY)
-        ?.let {
-            val viewModel = hiltViewModel<StatisticsViewModel>()
-            StatisticsScreen(viewModel, upPress)
-        }
+        StatisticsScreen(
+            onDetailParticipants = { id -> onDetailParticipants(id, navBackStackEntry) },
+            onDetailKeywords = { id -> onDetailKeywords(id, navBackStackEntry) },
+            upPress = upPress
+        )
+    }
+    composable(
+        route = "${KEYWORDS_DETAIL_ROUTE}/{${CHAT_ID_KEY}}",
+        arguments = listOf(navArgument(CHAT_ID_KEY) { type = NavType.StringType })
+    ) {
+        DetailScreen(
+            detailType = DetailType.KEYWORD,
+            upPress = upPress
+        )
+    }
+    composable(
+        route = "${PARTICIPANTS_DETAIL_ROUTE}/{${CHAT_ID_KEY}}",
+        arguments = listOf(navArgument(CHAT_ID_KEY) { type = NavType.StringType })
+    ) {
+        DetailScreen(
+            detailType = DetailType.PARTICIPANT,
+            upPress = upPress
+        )
     }
 }
 

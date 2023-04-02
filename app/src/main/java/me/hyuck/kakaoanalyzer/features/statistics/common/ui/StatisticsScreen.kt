@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.statistics.basic.ui.StatisticsBasicScreen
@@ -30,7 +31,9 @@ import java.time.LocalDateTime
 
 @Composable
 fun StatisticsScreen(
-    viewModel: StatisticsViewModel,
+    viewModel: StatisticsViewModel = hiltViewModel(),
+    onDetailParticipants: (String) -> Unit = {},
+    onDetailKeywords: (String) -> Unit = {},
     upPress: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -52,7 +55,9 @@ fun StatisticsScreen(
             chat = state.chat,
             tabs = state.statisticsTabs,
             onStartDateClick = { isShowingStartDatePicker = true },
-            onEndDateClick = { isShowingEndDatePicker = true }
+            onEndDateClick = { isShowingEndDatePicker = true },
+            onDetailParticipants = { onDetailParticipants(state.chat.id) },
+            onDetailKeywords = { onDetailKeywords(state.chat.id) }
         )
 
         StatisticsDatePicker(
@@ -82,6 +87,8 @@ fun TabbedViewPagerContent(
     tabs: List<StatisticsTab>,
     onStartDateClick: () -> Unit,
     onEndDateClick: () -> Unit,
+    onDetailParticipants: () -> Unit = {},
+    onDetailKeywords: () -> Unit = {},
 ) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -132,10 +139,16 @@ fun TabbedViewPagerContent(
                         StatisticsBasicScreen(chat = chat)
                     }
                     StatisticsTab.PARTICIPANT -> {
-                        ParticipantScreen(chat = chat)
+                        ParticipantScreen(
+                            chat = chat,
+                            onMoreButtonClick = onDetailParticipants
+                        )
                     }
                     StatisticsTab.KEYWORD -> {
-                        KeywordScreen(chat = chat)
+                        KeywordScreen(
+                            chat = chat,
+                            onMoreButtonClick = onDetailKeywords
+                        )
                     }
                     StatisticsTab.TIME -> {
                         TimeZoneScreen(chat = chat)

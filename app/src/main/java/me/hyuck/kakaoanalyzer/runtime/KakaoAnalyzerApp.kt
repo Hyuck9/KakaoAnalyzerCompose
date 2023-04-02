@@ -42,6 +42,8 @@ fun KakaoAnalyzerApp() {
             ) {
                 kakaoAnalyzerNavHost(
                     onChatSelected = appState::navigateToStatisticalChat,
+                    onDetailParticipants = appState::navigateParticipantsDetail,
+                    onDetailKeywords = appState::navigateToKeywordsDetail,
                     upPress = appState::upPress
                 )
             }

@@ -1,5 +1,6 @@
 package me.hyuck.kakaoanalyzer.foundation.uicomponent
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,12 +23,13 @@ import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 @Composable
 fun StatisticsBackHeader(
     modifier: Modifier = Modifier,
+    @StringRes titleResId: Int = R.string.title_statistics,
     onClickBack: () -> Unit,
     onClickShare: () -> Unit
 ) {
     KakaoAnalyzerBackHeader(
         modifier = modifier,
-        text = stringResource(id = R.string.title_statistics),
+        text = stringResource(titleResId),
         onClickBack = onClickBack,
         rightIcon = {
             KakaoAnalyzerIconButton(

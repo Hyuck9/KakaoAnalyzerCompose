@@ -15,10 +15,15 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.KEYWORDS_DETAIL_ROUTE
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.PARTICIPANTS_DETAIL_ROUTE
+import me.hyuck.kakaoanalyzer.runtime.MainDestinations.STATISTICS_ROUTE
 
 object MainDestinations {
     const val HOME_ROUTE = "home"
-    const val CHAT_DETAIL_ROUTE = "chat"
+    const val STATISTICS_ROUTE = "statistics"
+    const val KEYWORDS_DETAIL_ROUTE = "keywords"
+    const val PARTICIPANTS_DETAIL_ROUTE = "participants"
     const val CHAT_ID_KEY = "chatId"
 }
 
@@ -75,7 +80,19 @@ class KakaoAnalyzerAppState(
     fun navigateToStatisticalChat(chatId: String, from: NavBackStackEntry) {
         // In order to discard duplicated navigation events, we check the Lifecycle
         if (from.lifecycleIsResumed()) {
-            navController.navigate("${MainDestinations.CHAT_DETAIL_ROUTE}/$chatId")
+            navController.navigate("${STATISTICS_ROUTE}/$chatId")
+        }
+    }
+
+    fun navigateToKeywordsDetail(chatId: String, from: NavBackStackEntry) {
+        if (from.lifecycleIsResumed()) {
+            navController.navigate("${KEYWORDS_DETAIL_ROUTE}/$chatId")
+        }
+    }
+
+    fun navigateParticipantsDetail(chatId: String, from: NavBackStackEntry) {
+        if (from.lifecycleIsResumed()) {
+            navController.navigate("${PARTICIPANTS_DETAIL_ROUTE}/$chatId")
         }
     }
 }

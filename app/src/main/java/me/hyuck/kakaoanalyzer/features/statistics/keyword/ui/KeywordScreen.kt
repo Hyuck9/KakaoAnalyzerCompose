@@ -30,18 +30,23 @@ import splitties.resources.appStr
 @Composable
 fun KeywordScreen(
 	viewModel: KeywordViewModel = hiltViewModel(),
-	chat: Chat
+	chat: Chat,
+	onMoreButtonClick: () -> Unit = {}
 ) {
 	viewModel.initChat(chat)
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
-	KeywordContent(keywords = state.items)
+	KeywordContent(
+		keywords = state.items,
+		onMoreButtonClick = onMoreButtonClick
+	)
 }
 
 @Composable
 fun KeywordContent(
 	modifier: Modifier = Modifier,
-	keywords: List<Keyword>
+	keywords: List<Keyword>,
+	onMoreButtonClick: () -> Unit = {}
 ) {
 	LazyColumn(
 		modifier = modifier
@@ -62,7 +67,10 @@ fun KeywordContent(
 		}
 		if (keywords.size == 10) {
 			item {
-				SimpleTextButton(text = stringResource(R.string.button_more))
+				SimpleTextButton(
+					text = stringResource(R.string.button_more),
+					onClick = onMoreButtonClick
+				)
 			}
 		}
 	}

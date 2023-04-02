@@ -32,6 +32,7 @@ import splitties.resources.appStr
 fun ParticipantScreen(
 	viewModel: ParticipantViewModel = hiltViewModel(),
 	chat: Chat,
+	onMoreButtonClick: () -> Unit = {}
 ) {
 	viewModel.initChat(chat)
 	val state by viewModel.state.collectAsStateWithLifecycle()
@@ -39,7 +40,8 @@ fun ParticipantScreen(
 	ParticipantContent(
 		participants = state.items,
 		isOneOnOne = state.isOneOnOne,
-		oneOnOneAnalyticsInfo = state.oneOnOneAnalyticsInfo
+		oneOnOneAnalyticsInfo = state.oneOnOneAnalyticsInfo,
+		onMoreButtonClick = onMoreButtonClick
 	)
 }
 
@@ -48,7 +50,8 @@ private fun ParticipantContent(
 	modifier: Modifier = Modifier,
 	participants: List<Participant>,
 	oneOnOneAnalyticsInfo: OneOnOneAnalyticsInfo,
-	isOneOnOne: Boolean = false
+	isOneOnOne: Boolean = false,
+	onMoreButtonClick: () -> Unit = {}
 ) {
 	var isShowingDialog by rememberSaveable { mutableStateOf(false) }
 	LazyColumn(
@@ -70,7 +73,10 @@ private fun ParticipantContent(
 		}
 		if (participants.size == 10) {
 			item {
-				SimpleTextButton(text = stringResource(R.string.button_more))
+				SimpleTextButton(
+					text = stringResource(R.string.button_more),
+					onClick = onMoreButtonClick
+				)
 			}
 		} else if (isOneOnOne) {
 			item {
