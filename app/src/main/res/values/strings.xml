@@ -8,8 +8,13 @@
     <string name="fab_kakao_talk">카카오톡 실행하기</string>
 
     <string name="label_back">Back</string>
-    <string name="title_statistics">분석결과</string>
+    <string name="label_clear">Clear</string>
+    <string name="label_search">Search</string>
 
+    <string name="search_keyword">단어 찾기</string>
+
+
+    <string name="title_statistics">분석결과</string>
     <string name="title_analysis_overview">분석 개요</string>
     <string name="title_detail_participant">사용자별 채팅횟수 분석</string>
     <string name="title_detail_keyword">키워드 사용횟수 분석</string>
