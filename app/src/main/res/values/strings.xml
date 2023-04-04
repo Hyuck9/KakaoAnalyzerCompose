@@ -11,7 +11,7 @@
     <string name="label_clear">Clear</string>
     <string name="label_search">Search</string>
 
-    <string name="search_keyword">단어 찾기</string>
+    <string name="search_keyword">키워드 검색</string>
 
 
     <string name="title_statistics">분석결과</string>
