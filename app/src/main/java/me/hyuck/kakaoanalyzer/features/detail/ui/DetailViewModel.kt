@@ -6,6 +6,7 @@ import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.detail.data.DetailEnvironment
 import me.hyuck.kakaoanalyzer.features.detail.data.IDetailEnvironment
 import me.hyuck.kakaoanalyzer.foundation.extension.testLog
+import me.hyuck.kakaoanalyzer.model.DetailType
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations
 import javax.inject.Inject
 
@@ -17,9 +18,13 @@ class DetailViewModel @Inject constructor(
 
 	private val chatId = savedStateHandle.get<String>(MainDestinations.CHAT_ID_KEY)
 
-	init {
+	fun initDetail(detailType: DetailType) {
+		setState { copy(chatId = chatId, detailType = detailType) }
+
 		testLog("chatId : $chatId")
+		testLog("detailType : $detailType")
 	}
+
 	override fun dispatch(action: Unit) {
 	}
 

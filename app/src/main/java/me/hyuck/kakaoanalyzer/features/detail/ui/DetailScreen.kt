@@ -27,8 +27,7 @@ fun DetailScreen(
 	upPress: () -> Unit
 ) {
 
-	testLog("detailType : $detailType")
-
+	viewModel.initDetail(detailType)
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
 	StatisticScaffold(
