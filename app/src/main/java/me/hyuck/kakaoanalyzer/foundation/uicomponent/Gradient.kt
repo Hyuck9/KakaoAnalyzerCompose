@@ -1,14 +1,29 @@
 package me.hyuck.kakaoanalyzer.foundation.uicomponent
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+fun Modifier.offsetGradientBackground(
+	colors: List<Color>,
+	width: Float,
+	offset: Float = 0f
+) = background(
+	Brush.horizontalGradient(
+		colors,
+		startX = -offset,
+		endX = width - offset,
+		tileMode = TileMode.Mirror
+	)
+)
 
 fun Modifier.diagonalGradientBorder(
 	colors: List<Color>,
