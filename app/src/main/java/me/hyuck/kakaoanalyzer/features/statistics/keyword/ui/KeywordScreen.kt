@@ -1,10 +1,7 @@
 package me.hyuck.kakaoanalyzer.features.statistics.keyword.ui
 
 import android.graphics.Color
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -19,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.mikephil.charting.formatter.PercentFormatter
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.ContentRow
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.FilterBar
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.SimpleTextButton
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.rememberPieChart
 import me.hyuck.kakaoanalyzer.model.Chat
@@ -34,12 +32,20 @@ fun KeywordScreen(
 	onMoreButtonClick: () -> Unit = {}
 ) {
 	viewModel.initChat(chat)
+
+	LaunchedEffect(chat) {
+		viewModel.initFilters()
+	}
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
-	KeywordContent(
-		keywords = state.items,
-		onMoreButtonClick = onMoreButtonClick
-	)
+	Column {
+		FilterBar(filters = state.filters)
+		KeywordContent(
+			keywords = state.items,
+			onMoreButtonClick = onMoreButtonClick
+		)
+	}
+
 }
 
 @Composable

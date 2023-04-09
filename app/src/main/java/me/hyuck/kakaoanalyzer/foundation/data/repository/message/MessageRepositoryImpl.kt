@@ -26,6 +26,10 @@ class MessageRepositoryImpl(
 		return messageDao.countMessages(chat.id, chat.startDate, chat.endDate)
 	}
 
+	override fun getUserNames(chat: Chat): Flow<List<String>> {
+		return messageDao.observeUserNames(chat.id, chat.startDate, chat.endDate)
+	}
+
 	override fun getParticipants(
 		chat: Chat,
 		limit: Int

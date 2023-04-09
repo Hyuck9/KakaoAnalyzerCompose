@@ -4,15 +4,16 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -22,8 +23,19 @@ import me.hyuck.kakaoanalyzer.foundation.theme.KakaoAnalyzerTheme
 import me.hyuck.kakaoanalyzer.model.Filter
 
 @Composable
-fun FilterBar() {
-
+fun FilterBar(
+	filters: List<Filter>
+) {
+	LazyRow(
+		verticalAlignment = Alignment.CenterVertically,
+		horizontalArrangement = Arrangement.spacedBy(8.dp),
+		contentPadding = PaddingValues(start = 12.dp, end = 8.dp),
+		modifier = Modifier.heightIn(min = 56.dp)
+	) {
+		items(filters) { filter ->
+			FilterChip(filter = filter, shape = MaterialTheme.shapes.large)
+		}
+	}
 }
 
 @Composable

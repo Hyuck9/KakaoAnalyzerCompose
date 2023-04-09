@@ -7,6 +7,7 @@ import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.statistics.keyword.data.IKeywordEnvironment
 import me.hyuck.kakaoanalyzer.features.statistics.keyword.data.KeywordEnvironment
 import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.model.Filter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,6 +18,15 @@ class KeywordViewModel @Inject constructor(
 	fun initChat(chat: Chat) {
 		setState { copy(chat = chat) }
 		initKeywords()
+	}
+
+	fun initFilters() {
+		viewModelScope.launch {
+			environment.getUsers(state.value.chat)
+				.collect { userName ->
+					setState { copy(filters = userName.map { Filter(name = it) }) }
+				}
+		}
 	}
 
 	private fun initKeywords() {
