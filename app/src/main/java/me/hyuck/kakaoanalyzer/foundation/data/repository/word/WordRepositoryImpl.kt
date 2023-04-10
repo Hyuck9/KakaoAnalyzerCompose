@@ -18,8 +18,12 @@ class WordRepositoryImpl(
 		return wordDao.countKeywordById(chat.id, chat.startDate, chat.endDate)
 	}
 
-	override fun getKeywords(chat: Chat, limit: Int): Flow<List<Keyword>> {
-		return wordDao.getKeywords(chat.id, chat.startDate, chat.endDate, limit)
+	override fun getKeywords(chat: Chat, filters: List<String>, limit: Int): Flow<List<Keyword>> {
+		return if (filters.isEmpty()) {
+			wordDao.getKeywords(chat.id, chat.startDate, chat.endDate, limit)
+		} else {
+			wordDao.getKeywordsByFilters(chat.id, chat.startDate, chat.endDate, filters, limit)
+		}
 	}
 
 	override suspend fun saveWords(words: List<Word>) = withContext(ioDispatcher) {

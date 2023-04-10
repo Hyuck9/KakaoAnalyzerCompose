@@ -31,11 +31,12 @@ fun KeywordScreen(
 	chat: Chat,
 	onMoreButtonClick: () -> Unit = {}
 ) {
-	viewModel.initChat(chat)
-
 	LaunchedEffect(chat) {
 		viewModel.initFilters()
 	}
+
+	viewModel.initChat(chat)
+
 	val state by viewModel.state.collectAsStateWithLifecycle()
 
 	Column {

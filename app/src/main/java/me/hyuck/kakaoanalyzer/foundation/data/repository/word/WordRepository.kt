@@ -9,7 +9,7 @@ interface WordRepository {
 
 	fun countKeywordById(chat: Chat): Flow<Int>
 
-	fun getKeywords(chat: Chat, limit: Int = -1): Flow<List<Keyword>>
+	fun getKeywords(chat: Chat, filters: List<String>, limit: Int = -1): Flow<List<Keyword>>
 
 	suspend fun saveWords(words: List<Word>)
 

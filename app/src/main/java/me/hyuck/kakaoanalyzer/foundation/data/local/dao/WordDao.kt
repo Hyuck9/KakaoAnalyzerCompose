@@ -27,4 +27,14 @@ interface WordDao {
 		""")
 	fun getKeywords(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime, limit: Int = -1): Flow<List<Keyword>>
 
+	@Query("""
+		SELECT word, COUNT(*) AS wordCount 
+		FROM words 
+		WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate AND  userName IN (:filters)
+		GROUP BY word
+		ORDER BY wordCount DESC
+		LIMIT :limit
+		""")
+	fun getKeywordsByFilters(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime, filters: List<String>, limit: Int = -1): Flow<List<Keyword>>
+
 }

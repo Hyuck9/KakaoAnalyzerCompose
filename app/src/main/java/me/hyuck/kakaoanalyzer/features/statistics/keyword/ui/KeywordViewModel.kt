@@ -24,16 +24,14 @@ class KeywordViewModel @Inject constructor(
 		viewModelScope.launch {
 			environment.getUsers(state.value.chat)
 				.collect { userName ->
-					val filters = userName.map { Filter(name = it) }.toMutableList()
-					filters.add(0, Filter(name = "전체"))
-					setState { copy(filters = filters) }
+					setState { copy(filters = userName.map { Filter(name = it) }) }
 				}
 		}
 	}
 
 	private fun initKeywords() {
 		viewModelScope.launch {
-			environment.getKeywords(state.value.chat, 10)
+			environment.getKeywords(state.value.chat, state.value.filters, 10)
 				.collect {
 					setState { copy(items = it) }
 				}
