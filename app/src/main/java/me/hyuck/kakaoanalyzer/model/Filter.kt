@@ -10,3 +10,5 @@ class Filter(
 ) {
 	val enabled = mutableStateOf(enabled)
 }
+
+fun List<Filter>.toFilterNames() = this.filter { it.enabled.value }.map { it.name }.toList()

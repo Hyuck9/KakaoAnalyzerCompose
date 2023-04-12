@@ -43,8 +43,14 @@ fun DetailKeywordScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-            SearchBar()
-            DetailContent()
+            SearchBar(
+                query = state.query,
+                onQueryChange = { /* TODO: query Change Action */ },
+                onClearQuery = { /* TODO: clear Action*/ }
+            )
+            DetailContent(
+                keywords = state.items
+            )
         }
     }
 }

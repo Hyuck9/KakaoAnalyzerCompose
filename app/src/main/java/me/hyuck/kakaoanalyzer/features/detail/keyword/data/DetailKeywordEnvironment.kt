@@ -1,14 +1,27 @@
 package me.hyuck.kakaoanalyzer.features.detail.keyword.data
 
 import kotlinx.coroutines.flow.Flow
-import me.hyuck.kakaoanalyzer.foundation.data.repository.chat.ChatRepository
-import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.foundation.data.repository.message.MessageRepository
+import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
+import me.hyuck.kakaoanalyzer.model.Filter
+import me.hyuck.kakaoanalyzer.model.Keyword
+import me.hyuck.kakaoanalyzer.model.toFilterNames
 import javax.inject.Inject
 
 class DetailKeywordEnvironment @Inject constructor(
-    private val chatRepository: ChatRepository
+    private val messageRepository: MessageRepository,
+    private val wordRepository: WordRepository
 ) : IDetailKeywordEnvironment {
 
-    override fun getChatById(chatId: String): Flow<Chat> = chatRepository.getChatById(chatId)
+    override fun getUsers(chatId: String): Flow<List<String>> = messageRepository.getUserNames(chatId)
+
+    override fun getKeywords(
+        chatId: String,
+        filters: List<Filter>,
+        search: String
+    ): Flow<List<Keyword>> {
+        val userNames = filters.toFilterNames()
+        return wordRepository.getKeywords(chatId, userNames, search)
+    }
 
 }

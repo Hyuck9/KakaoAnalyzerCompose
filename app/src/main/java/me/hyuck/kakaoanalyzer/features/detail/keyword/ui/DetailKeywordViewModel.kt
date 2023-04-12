@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.detail.keyword.data.DetailKeywordEnvironment
 import me.hyuck.kakaoanalyzer.features.detail.keyword.data.IDetailKeywordEnvironment
+import me.hyuck.kakaoanalyzer.model.Filter
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations
 import javax.inject.Inject
 
@@ -19,15 +20,27 @@ class DetailKeywordViewModel @Inject constructor(
     private val chatId = savedStateHandle.get<String>(MainDestinations.CHAT_ID_KEY)
 
     init {
-        initKeywords()
+        initFilters()
+    }
+
+    private fun initFilters() {
+        viewModelScope.launch {
+            if (chatId != null) {
+                environment.getUsers(chatId)
+                    .collect { userName ->
+                        setState { copy(filters = userName.map { Filter(name = it) }) }
+                        initKeywords()
+                    }
+            }
+        }
     }
 
     private fun initKeywords() {
         viewModelScope.launch {
             if (chatId != null) {
-                environment.getChatById(chatId)
+                environment.getKeywords(chatId, state.value.filters, state.value.query.text)
                     .collect {
-                        setState { copy(chat = it) }
+                        setState { copy(items = it) }
                     }
             }
         }

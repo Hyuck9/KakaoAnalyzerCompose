@@ -26,6 +26,14 @@ class WordRepositoryImpl(
 		}
 	}
 
+	override fun getKeywords(chatId: String, filters: List<String>, query: String): Flow<List<Keyword>> {
+		return if (filters.isEmpty()) {
+			wordDao.getKeywords(chatId, "%$query%")
+		} else {
+			wordDao.getKeywordsByFilters(chatId, filters, "%$query%")
+		}
+	}
+
 	override suspend fun saveWords(words: List<Word>) = withContext(ioDispatcher) {
 		wordDao.saveWords(words.toWordEntities())
 	}

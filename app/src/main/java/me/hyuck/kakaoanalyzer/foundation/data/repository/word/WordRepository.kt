@@ -11,6 +11,8 @@ interface WordRepository {
 
 	fun getKeywords(chat: Chat, filters: List<String>, limit: Int = -1): Flow<List<Keyword>>
 
+	fun getKeywords(chatId: String, filters: List<String>, query: String = ""): Flow<List<Keyword>>
+
 	suspend fun saveWords(words: List<Word>)
 
 }

@@ -41,6 +41,9 @@ interface MessageDao {
 	@Query("SELECT userName FROM messages WHERE chatId = :chatId AND dateTime BETWEEN :startDate AND :endDate GROUP BY userName ORDER BY COUNT(userName) DESC")
 	fun observeUserNames(chatId: String, startDate: LocalDateTime, endDate: LocalDateTime): Flow<List<String>>
 
+	@Query("SELECT userName FROM messages WHERE chatId = :chatId GROUP BY userName ORDER BY COUNT(userName) DESC")
+	fun observeUserNames(chatId: String): Flow<List<String>>
+
 	@Query("""
 		SELECT hour, COUNT(*) AS messageCount 
 		FROM messages 

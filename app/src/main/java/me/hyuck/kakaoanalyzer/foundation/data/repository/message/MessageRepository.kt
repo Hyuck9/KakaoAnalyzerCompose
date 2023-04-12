@@ -14,6 +14,8 @@ interface MessageRepository {
 
 	fun getUserNames(chat: Chat): Flow<List<String>>
 
+	fun getUserNames(chatId: String): Flow<List<String>>
+
 	fun getParticipants(chat: Chat, limit: Int = -1): Flow<List<Participant>>
 
 	fun getMessages(chat: Chat, limit: Int = -1): Flow<List<Message>>

@@ -79,9 +79,9 @@ fun KakaoAnalyzerTextField(
 @Composable
 fun SearchBar(
 	modifier: Modifier = Modifier,
-	value: TextFieldValue = TextFieldValue(""),
+	query: TextFieldValue = TextFieldValue(""),
 	placeholder: String = stringResource(id = R.string.search_keyword),
-	onValueChange: (TextFieldValue) -> Unit = {},
+	onQueryChange: (TextFieldValue) -> Unit = {},
 	onClearQuery: () -> Unit = {}
 ) {
 	KakaoAnalyzerModalRow(
@@ -92,9 +92,9 @@ fun SearchBar(
 			modifier = modifier
 				.heightIn(min = 50.dp, max = 200.dp)
 				.weight(0.6f),
-			value = value,
+			value = query,
 			placeholderValue = placeholder,
-			onValueChange = onValueChange,
+			onValueChange = onQueryChange,
 			shape = MaterialTheme.shapes.large,
 			keyboardOptions = KeyboardOptions.Default.copy(
 				imeAction = ImeAction.None,
@@ -109,7 +109,7 @@ fun SearchBar(
 				)
 			},
 			trailingIcon = {
-				if (value.text.isNotEmpty()) {
+				if (query.text.isNotEmpty()) {
 					KakaoAnalyzerIconButton(
 						imageVector = Icons.Rounded.Clear,
 						onClick = onClearQuery

@@ -1,10 +1,13 @@
 package me.hyuck.kakaoanalyzer.features.detail.keyword.data
 
 import kotlinx.coroutines.flow.Flow
-import me.hyuck.kakaoanalyzer.model.Chat
+import me.hyuck.kakaoanalyzer.model.Filter
+import me.hyuck.kakaoanalyzer.model.Keyword
 
 interface IDetailKeywordEnvironment {
 
-    fun getChatById(chatId: String): Flow<Chat>
+    fun getUsers(chatId: String): Flow<List<String>>
+
+    fun getKeywords(chatId: String, filters: List<Filter>, search: String): Flow<List<Keyword>>
 
 }
