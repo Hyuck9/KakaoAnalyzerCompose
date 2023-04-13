@@ -13,10 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.hyuck.kakaoanalyzer.R
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.ContentRow
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.SearchBar
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticScaffold
-import me.hyuck.kakaoanalyzer.foundation.uicomponent.StatisticsBackHeader
+import me.hyuck.kakaoanalyzer.foundation.uicomponent.*
 import me.hyuck.kakaoanalyzer.model.Keyword
 
 @Composable
@@ -26,6 +23,8 @@ fun DetailKeywordScreen(
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    viewModel.initKeywords(state.filters)    // TODO: Action 으로 가도록 수정 필요
 
     StatisticScaffold(
         topBar = {
@@ -48,6 +47,7 @@ fun DetailKeywordScreen(
                 onQueryChange = { /* TODO: query Change Action */ },
                 onClearQuery = { /* TODO: clear Action*/ }
             )
+            FilterBar(filters = state.filters)
             DetailContent(
                 keywords = state.items
             )

@@ -29,16 +29,15 @@ class DetailKeywordViewModel @Inject constructor(
                 environment.getUsers(chatId)
                     .collect { userName ->
                         setState { copy(filters = userName.map { Filter(name = it) }) }
-                        initKeywords()
                     }
             }
         }
     }
 
-    private fun initKeywords() {
+    fun initKeywords(filters: List<Filter>) {
         viewModelScope.launch {
             if (chatId != null) {
-                environment.getKeywords(chatId, state.value.filters, state.value.query.text)
+                environment.getKeywords(chatId, filters, state.value.query.text)
                     .collect {
                         setState { copy(items = it) }
                     }
