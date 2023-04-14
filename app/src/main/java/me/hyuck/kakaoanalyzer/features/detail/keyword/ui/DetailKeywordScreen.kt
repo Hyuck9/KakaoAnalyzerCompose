@@ -24,7 +24,7 @@ fun DetailKeywordScreen(
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    viewModel.initKeywords(state.filters)    // TODO: Action 으로 가도록 수정 필요
+    viewModel.dispatch(DetailKeywordAction.ObserveKeywords(state.filters))
 
     StatisticScaffold(
         topBar = {

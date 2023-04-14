@@ -15,7 +15,7 @@ import javax.inject.Inject
 class DetailKeywordViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     detailEnvironment: DetailKeywordEnvironment
-) : StatefulViewModel<DetailKeywordState, Unit, Unit, IDetailKeywordEnvironment>(DetailKeywordState(), detailEnvironment) {
+) : StatefulViewModel<DetailKeywordState, Unit, DetailKeywordAction, IDetailKeywordEnvironment>(DetailKeywordState(), detailEnvironment) {
 
     private val chatId = savedStateHandle.get<String>(MainDestinations.CHAT_ID_KEY)
 
@@ -34,7 +34,15 @@ class DetailKeywordViewModel @Inject constructor(
         }
     }
 
-    fun initKeywords(filters: List<Filter>) {
+    override fun dispatch(action: DetailKeywordAction) {
+        when (action) {
+            is DetailKeywordAction.ObserveKeywords -> {
+                getKeywords(action.filters)
+            }
+        }
+    }
+
+    private fun getKeywords(filters: List<Filter>) {
         viewModelScope.launch {
             if (chatId != null) {
                 environment.getKeywords(chatId, filters, state.value.query.text)
@@ -43,10 +51,6 @@ class DetailKeywordViewModel @Inject constructor(
                     }
             }
         }
-    }
-
-    override fun dispatch(action: Unit) {
-        TODO("Not yet implemented")
     }
 
 }
