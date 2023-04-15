@@ -36,16 +36,16 @@ fun DetailKeywordScreen(
                 )
             }
         }
-    ) {
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(paddingValues)
         ) {
             SearchBar(
                 query = state.query,
-                onQueryChange = { /* TODO: query Change Action */ },
-                onClearQuery = { /* TODO: clear Action*/ }
+                onQueryChange = { viewModel.dispatch(DetailKeywordAction.OnQueryChange(it)) },
+                onClearQuery = { viewModel.dispatch(DetailKeywordAction.OnClearQuery) }
             )
             FilterBar(filters = state.filters)
             DetailContent(

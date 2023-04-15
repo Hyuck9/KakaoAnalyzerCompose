@@ -1,5 +1,6 @@
 package me.hyuck.kakaoanalyzer.features.detail.keyword.ui
 
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,6 +39,16 @@ class DetailKeywordViewModel @Inject constructor(
         when (action) {
             is DetailKeywordAction.ObserveKeywords -> {
                 getKeywords(action.filters)
+            }
+            is DetailKeywordAction.OnQueryChange -> {
+                viewModelScope.launch {
+                    setState { copy(query = action.query) }
+                }
+            }
+            is DetailKeywordAction.OnClearQuery -> {
+                viewModelScope.launch {
+                    setState { copy(query = TextFieldValue("")) }
+                }
             }
         }
     }
