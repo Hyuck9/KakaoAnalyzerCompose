@@ -7,7 +7,6 @@ import kotlinx.coroutines.launch
 import me.hyuck.kakaoanalyzer.features.base.StatefulViewModel
 import me.hyuck.kakaoanalyzer.features.statistics.basic.data.IStatisticsBasicEnvironment
 import me.hyuck.kakaoanalyzer.features.statistics.basic.data.StatisticsBasicEnvironment
-import me.hyuck.kakaoanalyzer.foundation.extension.testLog
 import me.hyuck.kakaoanalyzer.model.Chat
 import javax.inject.Inject
 
@@ -22,7 +21,6 @@ class StatisticsBasicViewModel @Inject constructor(
 	}
 
 	private fun initCount() {
-		testLog("initCount : ${state.value}")
 		viewModelScope.launch {
 			combine(
 				environment.getUserCount(state.value.chat),
