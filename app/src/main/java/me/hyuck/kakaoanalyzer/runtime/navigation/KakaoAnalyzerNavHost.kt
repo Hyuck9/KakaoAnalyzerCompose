@@ -4,14 +4,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import me.hyuck.kakaoanalyzer.features.detail.keyword.ui.DetailKeywordScreen
-import me.hyuck.kakaoanalyzer.features.detail.ui.DetailScreen
+import me.hyuck.kakaoanalyzer.features.detail.message.ui.MessageScreen
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsScreen
 import me.hyuck.kakaoanalyzer.features.home.chats.ui.ChatsViewModel
 import me.hyuck.kakaoanalyzer.features.home.guide.ui.GuideScreen
 import me.hyuck.kakaoanalyzer.features.home.settings.ui.SettingsScreen
 import me.hyuck.kakaoanalyzer.features.statistics.common.ui.StatisticsScreen
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.HomeSections
-import me.hyuck.kakaoanalyzer.model.DetailType
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations.CHAT_ID_KEY
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations.HOME_ROUTE
 import me.hyuck.kakaoanalyzer.runtime.MainDestinations.KEYWORDS_DETAIL_ROUTE
@@ -52,8 +51,7 @@ fun NavGraphBuilder.kakaoAnalyzerNavHost(
         route = "${PARTICIPANTS_DETAIL_ROUTE}/{${CHAT_ID_KEY}}",
         arguments = listOf(navArgument(CHAT_ID_KEY) { type = NavType.StringType })
     ) {
-        DetailScreen(
-            detailType = DetailType.PARTICIPANT,
+        MessageScreen(
             upPress = upPress
         )
     }
