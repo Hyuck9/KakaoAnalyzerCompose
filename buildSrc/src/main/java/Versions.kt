@@ -23,6 +23,10 @@ object Versions {
     // Navigation
     const val navigationCompose = "2.5.3"
 
+    // Paging
+    const val paging = "3.1.1"
+    const val pagingCompose = "1.0.0-alpha18"
+
     // Hilt (Dependency Injection)
     const val hilt = "2.44.2"
     const val hiltNavigationCompose = "1.0.0"

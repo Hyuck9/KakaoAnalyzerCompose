@@ -82,6 +82,10 @@ dependencies {
     implementation(Dependencies.composeViewModel)
     implementation(Dependencies.constraintLayout)
 
+    // Paging
+    implementation(Dependencies.paging)
+    implementation(Dependencies.pagingCompose)
+
     // Splash
     implementation(Dependencies.splahScreen)
 

@@ -31,6 +31,10 @@ object Dependencies {
     val composeViewModel by lazy { "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}" }
     val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}" }
 
+    // Paging
+    val paging by lazy { "androidx.paging:paging-runtime:${Versions.paging}" }
+    val pagingCompose by lazy { "androidx.paging:paging-compose:${Versions.pagingCompose}" }
+
     // Splash Screen
     val splahScreen by lazy { "androidx.core:core-splashscreen:${Versions.splahScreen}" }
 
