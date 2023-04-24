@@ -1,7 +1,7 @@
 package me.hyuck.kakaoanalyzer.foundation.data.local.entity
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.Companion.CASCADE
 import java.time.LocalDateTime
 import java.util.*
 

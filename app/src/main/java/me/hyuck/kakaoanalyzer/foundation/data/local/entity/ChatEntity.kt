@@ -3,7 +3,6 @@ package me.hyuck.kakaoanalyzer.foundation.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import me.hyuck.kakaoanalyzer.foundation.extension.parseMemory
 import me.hyuck.kakaoanalyzer.model.ChatStatus
 import java.time.LocalDateTime
 import java.util.*
