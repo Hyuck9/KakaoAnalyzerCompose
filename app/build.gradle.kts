@@ -62,6 +62,7 @@ dependencies {
     implementation(Dependencies.roomRuntime)
     kapt(Dependencies.roomCompiler)
     implementation(Dependencies.roomKtx)
+    implementation(Dependencies.roomPaging)
 
     // Hilt
     implementation(Dependencies.hilt)
@@ -83,7 +84,6 @@ dependencies {
     implementation(Dependencies.constraintLayout)
 
     // Paging
-    implementation(Dependencies.paging)
     implementation(Dependencies.pagingCompose)
 
     // Splash

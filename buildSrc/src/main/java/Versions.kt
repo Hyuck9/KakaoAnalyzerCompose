@@ -6,7 +6,7 @@ object Versions {
     const val coreKtx = "1.9.0"
 
     // Room
-    const val room = "2.4.3"
+    const val room = "2.5.1"
 
     // Compose Base
     const val composeCompiler = "1.3.2"
@@ -24,7 +24,6 @@ object Versions {
     const val navigationCompose = "2.5.3"
 
     // Paging
-    const val paging = "3.1.1"
     const val pagingCompose = "1.0.0-alpha18"
 
     // Hilt (Dependency Injection)

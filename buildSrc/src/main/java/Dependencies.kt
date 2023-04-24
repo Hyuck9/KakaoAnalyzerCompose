@@ -11,6 +11,7 @@ object Dependencies {
     val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.room}" }
     val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
     val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
+    val roomPaging by lazy { "androidx.room:room-paging:${Versions.room}" }
 
     // Dagger Hilt
     val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
@@ -32,7 +33,6 @@ object Dependencies {
     val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}" }
 
     // Paging
-    val paging by lazy { "androidx.paging:paging-runtime:${Versions.paging}" }
     val pagingCompose by lazy { "androidx.paging:paging-compose:${Versions.pagingCompose}" }
 
     // Splash Screen
