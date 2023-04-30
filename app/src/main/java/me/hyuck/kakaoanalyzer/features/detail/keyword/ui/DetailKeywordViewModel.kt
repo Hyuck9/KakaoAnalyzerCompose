@@ -56,10 +56,12 @@ class DetailKeywordViewModel @Inject constructor(
     private fun getKeywords(filters: List<Filter>) {
         viewModelScope.launch {
             if (chatId != null) {
-                environment.getKeywords(chatId, filters, state.value.query.text)
-                    .collect {
-                        setState { copy(items = it) }
-                    }
+//                environment.getKeywords(chatId, filters, state.value.query.text)
+//                    .collect {
+//                        setState { copy(items = it) }
+//                    }
+                val keywords = environment.getKeywords(chatId, filters, state.value.query.text)
+                setState { copy(items = keywords) }
             }
         }
     }

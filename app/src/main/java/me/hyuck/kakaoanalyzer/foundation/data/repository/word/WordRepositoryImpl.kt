@@ -1,5 +1,6 @@
 package me.hyuck.kakaoanalyzer.foundation.data.repository.word
 
+import androidx.paging.PagingSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -26,7 +27,7 @@ class WordRepositoryImpl(
 		}
 	}
 
-	override fun getKeywords(chatId: String, filters: List<String>, query: String): Flow<List<Keyword>> {
+	override fun getKeywords(chatId: String, filters: List<String>, query: String): PagingSource<Int, Keyword> {
 		return if (filters.isEmpty()) {
 			wordDao.getKeywords(chatId, "%$query%")
 		} else {

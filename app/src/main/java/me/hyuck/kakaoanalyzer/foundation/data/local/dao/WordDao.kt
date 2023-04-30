@@ -1,5 +1,6 @@
 package me.hyuck.kakaoanalyzer.foundation.data.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -44,7 +45,8 @@ interface WordDao {
 		GROUP BY word
 		ORDER BY wordCount DESC
 		""")
-	fun getKeywords(chatId: String, query: String): Flow<List<Keyword>>
+	fun getKeywords(chatId: String, query: String): PagingSource<Int, Keyword>
+//	fun getKeywords(chatId: String, query: String): Flow<List<Keyword>>
 
 	@Query("""
 		SELECT word, COUNT(*) AS wordCount 
@@ -53,6 +55,7 @@ interface WordDao {
 		GROUP BY word
 		ORDER BY wordCount DESC
 		""")
-	fun getKeywordsByFilters(chatId: String, filters: List<String>, query: String): Flow<List<Keyword>>
+	fun getKeywordsByFilters(chatId: String, filters: List<String>, query: String): PagingSource<Int, Keyword>
+//	fun getKeywordsByFilters(chatId: String, filters: List<String>, query: String): Flow<List<Keyword>>
 
 }

@@ -1,5 +1,8 @@
 package me.hyuck.kakaoanalyzer.features.detail.keyword.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import me.hyuck.kakaoanalyzer.foundation.data.repository.message.MessageRepository
 import me.hyuck.kakaoanalyzer.foundation.data.repository.word.WordRepository
@@ -19,9 +22,21 @@ class DetailKeywordEnvironment @Inject constructor(
         chatId: String,
         filters: List<Filter>,
         search: String
-    ): Flow<List<Keyword>> {
+    ): Flow<PagingData<Keyword>> {
         val userNames = filters.toFilterNames()
-        return wordRepository.getKeywords(chatId, userNames, search)
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                prefetchDistance = 10,
+                initialLoadSize = 20
+            ),
+            pagingSourceFactory = {
+                wordRepository.getKeywords(chatId, userNames, search)
+            }
+        ).flow
+
+//        return wordRepository.getKeywords(chatId, userNames, search)
     }
 
 }

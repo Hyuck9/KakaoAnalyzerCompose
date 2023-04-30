@@ -7,11 +7,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import me.hyuck.kakaoanalyzer.R
 import me.hyuck.kakaoanalyzer.foundation.uicomponent.*
 import me.hyuck.kakaoanalyzer.model.Keyword
@@ -24,7 +28,10 @@ fun DetailKeywordScreen(
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    viewModel.dispatch(DetailKeywordAction.ObserveKeywords(state.filters))
+
+    LaunchedEffect(state.query) {
+        viewModel.dispatch(DetailKeywordAction.ObserveKeywords(state.filters))
+    }
 
     StatisticScaffold(
         topBar = {
@@ -49,7 +56,7 @@ fun DetailKeywordScreen(
             )
             FilterBar(filters = state.filters)
             DetailContent(
-                keywords = state.items
+                keywords = state.items.collectAsLazyPagingItems()
             )
         }
     }
@@ -58,7 +65,7 @@ fun DetailKeywordScreen(
 @Composable
 private fun DetailContent(
     modifier: Modifier = Modifier,
-    keywords: List<Keyword> = emptyList(),
+    keywords: LazyPagingItems<Keyword>
 ) {
     LazyColumn(
         modifier = modifier
@@ -66,10 +73,17 @@ private fun DetailContent(
             .padding(horizontal = 16.dp)
     ) {
         items(
-            items = keywords,
-            key = { item -> item.word }
+            items = keywords
         ) { keyword ->
-            ContentRow(title = keyword.word, count = keyword.wordCount)
+            keyword?.let {
+                ContentRow(title = keyword.word, count = keyword.wordCount)
+            }
         }
+//        items(
+//            items = keywords,
+//            key = { item -> item.word }
+//        ) { keyword ->
+//            ContentRow(title = keyword.word, count = keyword.wordCount)
+//        }
     }
 }
